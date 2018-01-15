@@ -1,0 +1,20 @@
+<% extend 'layout' %>
+<h1><%= @title %></h1>
+<form method="post" enctype="multipart/form-data" action="/upload">
+  <h2>username</h2>
+  <input type="text" name="username">
+  <h2>title</h2>
+  <input type="text" name="title">
+  <h2>comment</h2>
+  <input type="text" name="comment">
+  <!-- この辺りにタグのラジオボタンを入れる予定 -->
+  <h2>picture</h2>
+  <input type="file" name="picture">
+  <input type="submit">
+</form>
+
+<ul>
+  <% for item in @messages : %>
+    <li><%= item.title %><br/><img src="/uploads/<%= item.file %>" width="300"></li>
+  <% end %>
+</ul>

@@ -1,0 +1,65 @@
+
+	.aspect{
+		width:100%;
+		height:50vw;
+	}
+	.aspect_normal,
+	.aspect_dot,
+	.aspect_key,
+	.aspect_dotkey{
+		width:100%;
+		height:25vw;
+	}
+	#gmap_canvas,
+	#gmap_canvas_normal,
+	#gmap_canvas_dot,
+	#gmap_canvas_key,
+	#gmap_canvas_dotkey,
+	div.g_canvas{
+		width:100%;
+		height:100%;
+	}
+
+  div.gmapinfo{
+  margin:1px;
+  padding:1px;
+  }
+  div.gmapinfo img{
+  width:15vw;
+  }
+
+  span.title p{
+  font-weight:bold;
+  }
+
+  @media screen and (min-width: 781px) {
+   	div.gmapinfo span p,
+   	span.title p,
+   	div.gmapinfo a{
+   	font-size: 14px;
+   	}
+   }
+
+  @media screen and (min-width: 381px) and (max-width: 780px) {
+   	div.gmapinfo span p,
+  	 span.title p,
+   	div.gmapinfo a{
+   		font-size: 14px;
+  		line-height: 0px;
+   	}
+   }
+
+  @media screen and (max-width: 380px) {
+   	span.title p{
+   		font-size: 12px;
+  		padding:1px;
+  		line-height: 14px;
+  	}
+
+   	div.gmapinfo span p,
+   	div.gmapinfo a{
+   		font-size: 10px;
+  		padding:1px;
+  		line-height: 0px;
+   	}
+   }

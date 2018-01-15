@@ -1,0 +1,74 @@
+<% extend 'layout3' %>
+
+<!-- ヘッダー -->
+<div id="header" class="demo1">
+  <div class="header_top">
+  <img id="icon" src="picture/mapicon2.png">
+     <img id="demo" src="/picture/transpalent.png">
+  </div>
+    <div class="fixheader">
+        <ul class="topmenu">
+            <li><a href="/"><img id="Upload" src="picture/003-upload.png"></a></li>
+            <li><a href="/sample"><img id="Like" src="picture/001-like.png"></a></li>
+            <li><a href="/map"><img id="Home" src="picture/002-home.png"></a></li>
+        </ul>
+    </div>
+</div>
+
+
+  <form method="post" enctype="multipart/form-data" action="/upload">
+    <script src="javascripts/sample4.js"></script>
+
+        <!-- ユーザー名aa -->
+        <div id="Sample_user" name="Sample2_form" class="formbox">
+          <p name="userhead">　☆　ユーザー名</p>
+          <input type="text" id="user" name="username" value="Username">
+        </div>
+
+        <!-- 写真タイトル -->
+        <div id="Sample_title" name="Sample1_form" class="formbox">
+          <p>　☆　タイトル</p>
+          <input type="text" id="titlei" name="title" value="Title"></br></br>
+        </div>
+
+        <!-- 写真投稿 -->
+        <div id="dropzone" effectAllowed="move">
+          <p>ここに写真をドラッグしてください</br></br>
+          <p>またはファイルを選択してください</p>
+          <input type="file" id="image_file" value="ファイルを選択" name="picture">
+        </div>
+        <ul id="files" name="picture"></ul>
+        <script src="javascripts/sample4a.js"></script>
+
+        <!-- コメント投稿 -->
+        <div id="Sample_comment" class="formbox">
+          <p>　☆　コメント</p>
+          <input type="text" id="commenti" name="comment" value="Comment">
+        </div>
+
+        <!-- タグ -->
+        <div name="Sample4_form" id="radio" class="formbox">
+          <p>　☆　タグ</p>
+          <input type="radio" id="radio1" name="radio" value="タグ1"/>タグ1</br>
+          <input type="radio" id="radio2" name="radio" value="タグ2"/>タグ2</br>
+          <input type="radio" id="radio3" name="radio" value="タグ3"/>タグ3</br>
+          <!-- <input type="button" value="タグ登録" onclick="Sample3()"></br> -->
+
+          <input type="button" id="newtag" value="新規タグ作成"></br>
+
+          </br></br>
+
+        </div>
+
+        <!-- 送信ボタン -->
+        <div class="formbox">
+          <input type="submit" value="送信" class="square_btn"></br>
+        </div>
+
+    </form>
+
+  <ul>
+    <% for item in @messages : %>
+      <li><%= item.title %><br/><img src="/uploads/<%= item.file %>" width="300"></li>
+    <% end %>
+  </ul>

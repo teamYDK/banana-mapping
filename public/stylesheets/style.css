@@ -1,0 +1,95 @@
+/*body {
+    font-family: 'Lato', sans-serif;
+    background: #eee;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}*/
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    /*font-family: "Lato", “游ゴシック Medium”, “Yu Gothic Medium”, sans-serif;*/ /*全体のフォント*/
+    font-family: "Lato", "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-weight: lighter;
+    position: relative;
+    margin: 0;
+    background: #eee;
+}
+
+.content {
+    min-height: 100vh;
+}
+
+.content.bg {
+    position: relative;
+}
+
+.content-body {
+    padding: 60px 60px;
+    padding-top: 150px;
+    line-height: 2em;
+    position: relative;
+    z-index: 2;
+}
+
+.clear {
+  clear: both;
+}
+
+
+article {
+			height: 1000px;
+			margin: 100px auto;
+			text-align: center;
+			line-height: 1.9;
+}
+
+article p {
+			margin-bottom: 1em;
+}
+
+a {
+			color: #0b8793;
+}
+
+#main-visual {
+			background: #1d76a6;
+			background: -webkit-linear-gradient(90deg, #360033 10%, #0b8793 90%);
+			background:    -moz-linear-gradient(90deg, #360033 10%, #0b8793 90%);
+			background:     -ms-linear-gradient(90deg, #360033 10%, #0b8793 90%);
+			background:      -o-linear-gradient(90deg, #360033 10%, #0b8793 90%);
+			background:         linear-gradient(90deg, #360033 10%, #0b8793 90%);
+			height: 700px;
+}
+
+footer {
+			padding: 30px;
+			text-align: center;
+			border-top: solid 1px #bbb;
+}
+
+footer a {
+			color: #666;
+			text-decoration: none;
+}
+
+
+.inner {
+			width: 980px;
+			margin: 0 auto;
+}
+
+.inner:after {
+			content: "";
+			clear: both;
+			display: block;
+}

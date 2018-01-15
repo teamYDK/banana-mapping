@@ -1,0 +1,4 @@
+AuthType  Basic
+AuthName "Authentication Sample"
+AuthUserFile views/.htpasswd
+require valid-user

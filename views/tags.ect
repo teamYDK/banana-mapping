@@ -1,0 +1,13 @@
+<% extend 'layouttag' %>
+<h1><%= @title %></h1>
+<form method="post" action="/tag">
+  <h2>name</h2>
+  <input type="text" name="name"><!-- input.jsでもnameと統一されるように -->
+  <input type="submit">
+</form>
+
+<ul>
+  <% for item in @tags : %>
+    <li><%= item.name %></li>
+  <% end %>
+</ul>

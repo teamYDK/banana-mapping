@@ -1,0 +1,92 @@
+/* header *//* header */
+#top-head {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 0 0;
+    line-height: 1;
+}
+#top-head:after {
+    content: "";
+    display: block;
+    height: 1px;
+    color: black;
+    background: black;
+    width: 980px;
+    margin: 30px auto 0;
+}
+
+#top-head a,
+#top-head {
+    color: black;
+    text-decoration: none;
+    z-index: 999;
+    font-size: 18px;
+}
+
+#top-head .inner {
+    position: relative;
+
+}
+#top-head .logo {
+    float: left;
+    font-size: 32px;
+}
+#global-nav ul {
+    list-style: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 14px;
+}
+#global-nav ul li {
+    float: left;
+    position: relative;
+
+}
+
+#global-nav ul li :hover, #global-nav ul li :focus {
+  color:tomato;
+}
+
+#global-nav ul li :hover > svg, #global-nav ul li :focus > svg{
+  color:tomato;
+}
+
+#global-nav ul li a {
+    padding: 0 30px;
+}
+/* transition */
+#top-head,
+#top-head:after,
+#top-head .logo,
+#global-nav ul li,
+#global-nav ul li a {
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+}
+/* Fixed */
+#top-head.fixed {
+    padding-top: 15px;
+    background: rgba(255,255,255,.7);
+}
+#top-head.fixed .logo {
+    font-size: 24px;
+    color: #333;
+}
+
+#top-head.fixed:after {
+    width: 100%;
+    margin-top: 20px;
+}
+#top-head.fixed #global-nav ul li a {
+    color: #333;
+    padding: 0 20px;
+}
+
+.inner {
+    width: 980px;
+    margin: 0 auto;
+}

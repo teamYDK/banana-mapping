@@ -1,0 +1,240 @@
+.input {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 1em;
+  max-width: 350px;
+  width: calc(100% - 2em);
+  vertical-align: top;
+}
+
+.input__field {
+  position: relative;
+  display: block;
+  float: right;
+  padding: 0.8em;
+  width: 60%;
+  border: none;
+  border-radius: 0;
+  background: #f0f0f0;
+  color: #aaa;
+  font-weight: bold;
+  -webkit-appearance: none;
+}
+
+.input__field:focus {
+  outline: none;
+}
+
+.input__label {
+  display: inline-block;
+  float: right;
+  padding: 0 1em;
+  width: 40%;
+  colorx #EF3F56;
+  font-weight: bold;
+  font-size: 20px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input__label-in-form {
+  position: relative;
+  display: block;
+  padding: 1em 0;
+  width: 100%;
+}
+
+.input--form {
+  overflow: hidden;
+}
+
+.input__field--form {
+  margin-top: 4.5em;
+  padding: 0.85em 0.4em;
+  width: 100%;
+  background: transparent;
+  color: #595F6E
+}
+
+.input__label--form {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 0.25em;
+  width: 100%;
+  height: calc(100% - 1em);
+  text-align: left;
+  pointer-events: none;
+}
+
+.input__label-in-form--form {
+  position: absolute;
+}
+
+.input__label--form::before,
+.input__label--form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 10px);
+  border-bottom: 1px solid #B9C1CA;
+}
+
+.input__label--form::after {
+  /*margin-top: 2px;*/
+  border-bottom: 2px solid red;
+  -webkit-transform: translate3d(-100% 0, 0);
+  transform: translate3d(-100%, 0, 0);
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+}
+
+.input__label--form-color-1::after {
+	border-color: #5d627b;
+}
+
+.input__label--form-color-2::after {
+	border-color: hsl(160, 100%, 50%);
+}
+
+.input__label--form-color-3::after {
+	border-color: hsl(20, 100%, 50%);
+}
+
+.input__field--form:focus + .input__label--form::after,
+.input--filled .input__label--form::after {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+
+.input__field--form:focus + .input__label--form .input__label-in-form--form,
+.input--filled .input__label-in-form--form {
+	-webkit-animation: anim-1 0.3s forwards;
+	animation: anim-1 0.3s forwards;
+}
+
+
+@-webkit-keyframes anim-1 {
+	50% {
+		opacity: 0;
+		-webkit-transform: translate3d(1em, 0, 0);
+		transform: translate3d(1em, 0, 0);
+	}
+	51% {
+		opacity: 0;
+		-webkit-transform: translate3d(-1em, -40%, 0);
+		transform: translate3d(-1em, -40%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, -40%, 0);
+		transform: translate3d(0, -40%, 0);
+	}
+}
+
+@keyframes anim-1 {
+	50% {
+		opacity: 0;
+		-webkit-transform: translate3d(1em, 0, 0);
+		transform: translate3d(1em, 0, 0);
+	}
+	51% {
+		opacity: 0;
+		-webkit-transform: translate3d(-1em, -40%, 0);
+		transform: translate3d(-1em, -40%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, -40%, 0);
+		transform: translate3d(0, -40%, 0);
+	}
+}
+
+.input__field--minoru {
+	width: 100%;
+	background: #f0f0f0;
+	box-shadow: 0px 0px 0px 2px transparent;
+	color: #5d627b;
+	-webkit-transition: box-shadow 0.3s;
+	transition: box-shadow 0.3s;
+  margin-top: 5em;
+}
+
+.input__label--minoru {
+	padding: 0;
+	width: 100%;
+	text-align: left;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0 0.25em;
+  width: 100%;
+  height: calc(100% - 1em);
+  text-align: left;
+  pointer-events: none;
+}
+
+.input__label--minoru::after {
+	content: '';
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  width: 100%;
+  /*height: 4em;*/
+	box-shadow: 0px 0px 0px 0px;
+}
+
+.input__field--minoru:focus {
+	box-shadow: 0px 0px 0px 2px #5d627b;
+}
+
+.input__field--minoru:focus + .input__label--minoru {
+	pointer-events: none;
+}
+
+@-webkit-keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+@keyframes anim-shadow {
+	to {
+		box-shadow: 0px 0px 100px 50px;
+    	opacity: 0;
+	}
+}
+
+.input__label-in-form--minoru {
+	padding: 0.75em 0.15em;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    line-height: 150%;
+    resize:vertical;
+}
+
+.form-title {
+  padding: 1em 0;
+  font-weight: bold;
+  font-size: 20px;
+  position: absolute;
+}
+
+#dropzone {
+    margin: 0rem 3rem 3rem 0rem;
+    padding-top: 2em;
+}

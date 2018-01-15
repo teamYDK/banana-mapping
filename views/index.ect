@@ -1,0 +1,175 @@
+<% extend 'layout' %>
+
+<!-- ヘッダー -->
+<!-- メニューヘッダー -->
+    <header id="top-head">
+      <div class="inner">
+          <h1 class="logo">My Mapping</h1>
+              <nav id="global-nav">
+                  <ul>
+                      <li><a href="/">
+                        <svg class="icon icon-inbox-upload" viewBox="0 0 29 27">
+                          <path d="M15 5l-3.25 3.25-0.75-0.75 4.5-4.5 4.5 4.5-0.75 0.75-3.25-3.25v11h-1v-11zM17 11h5.4l4.375 7h-6.775v2.002c0 1.1-0.894 1.998-1.997 1.998h-5.005c-1.102 0-1.997-0.895-1.997-1.998v-2.002h-6.775l4.375-7h5.4v-1h-6l-5 8v9h25v-9l-5-8h-6v1zM21 19h6v7h-23v-7h6v1.5c0 1.381 1.115 2.5 2.496 2.5h6.008c1.379 0 2.496-1.11 2.496-2.5v-1.5z"></path>
+                        </svg>UPLOAD</a>
+                      </li>
+                      <li><a href="/multi-map">
+                        <svg class="icon icon-map" viewBox="0 0 41 32">
+                          <path d="M9.239 31.927c0.009 0.006 0.021 0.003 0.030 0.009 0.073 0.037 0.149 0.064 0.231 0.064 0.044 0 0.088-0.006 0.132-0.018l10.868-2.966 10.868 2.966c0.044 0.012 0.088 0.018 0.132 0.018 0.082 0 0.158-0.027 0.23-0.065 0.010-0.005 0.021-0.003 0.030-0.009l9-5.5c0.191-0.117 0.281-0.348 0.22-0.563l-4.984-17.5c-0.041-0.147-0.148-0.267-0.29-0.326-0.142-0.057-0.301-0.048-0.436 0.026l-4.962 2.784c-0.24 0.135-0.326 0.44-0.191 0.681s0.439 0.327 0.682 0.191l4.409-2.475 4.707 16.526-8.015 4.899-1.904-15.231c-0.034-0.275-0.293-0.466-0.559-0.434-0.273 0.034-0.468 0.284-0.434 0.558l1.907 15.259-9.91-2.705v-2.73c0-0.276-0.224-0.5-0.5-0.5s-0.5 0.224-0.5 0.5v2.73l-9.911 2.705 1.907-15.259c0.034-0.274-0.16-0.524-0.434-0.558-0.272-0.032-0.524 0.159-0.559 0.434l-1.903 15.231-8.015-4.898 4.707-16.525 4.409 2.475c0.242 0.134 0.546 0.049 0.682-0.191 0.135-0.241 0.049-0.545-0.191-0.681l-4.963-2.785c-0.133-0.075-0.292-0.085-0.435-0.026s-0.249 0.178-0.29 0.326l-4.984 17.5c-0.062 0.216 0.028 0.446 0.22 0.563l8.999 5.5zM20.161 23.368c0.096 0.088 0.217 0.132 0.339 0.132 0.12 0 0.24-0.043 0.336-0.129 0.333-0.303 8.164-7.489 8.164-14.871 0-4.767-3.733-8.5-8.5-8.5s-8.5 3.733-8.5 8.5c0 7.254 7.828 14.56 8.161 14.868zM20.5 1c4.275 0 7.5 3.224 7.5 7.5 0 6.097-5.993 12.337-7.497 13.807-1.501-1.487-7.503-7.809-7.503-13.807 0-4.276 3.225-7.5 7.5-7.5zM25 8.5c0-2.481-2.019-4.5-4.5-4.5s-4.5 2.019-4.5 4.5 2.019 4.5 4.5 4.5 4.5-2.019 4.5-4.5zM20.5 12c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"></path>
+                        </svg>MAP</a></li>
+                      <li><a href="./sample1.html">COMPANY</a></li>
+                      <li><a href="/login">
+                        <svg class="icon icon-key" viewBox="0 0 32 32">
+                          <path d="M14.683 14.698c0.117 0 0.235-0.041 0.33-0.124l11.317-9.922-0.66-0.752-11.317 9.921c-0.208 0.182-0.229 0.498-0.046 0.706 0.099 0.113 0.237 0.171 0.376 0.171zM10.188 32c6.142 0 9.812-4.83 9.812-9.5 0-1.346-0.322-2.829-0.798-3.792l4.522-2.261c0.169-0.085 0.276-0.258 0.276-0.447v-4h3c0.011 0 0.102-0.006 0.113-0.006 0.666-0.045 0.865-0.257 0.887-0.994v-4h3c0.129 0 0.218 0.014 0.278 0.023 0.121 0.019 0.347 0.054 0.543-0.122 0.202-0.18 0.193-0.408 0.185-0.609-0.002-0.072-0.006-0.167-0.006-0.292v-4.531c0-0.81-0.659-1.469-1.469-1.469h-3.875c-0.354 0-0.698 0.129-0.969 0.364l-13.187 11.56c-0.649-0.13-1.63-0.299-2.313-0.299-5.617 0-10.187 4.57-10.187 10.187s4.57 10.188 10.188 10.188zM10.188 12.625c0.501 0 1.359 0.12 2.354 0.328 0.155 0.034 0.314-0.010 0.432-0.113l13.371-11.722c0.087-0.076 0.198-0.118 0.311-0.118h3.875c0.259 0 0.469 0.21 0.469 0.469v4.531h-3.5c-0.276 0-0.5 0.224-0.5 0.5v4.5h-3.5c-0.276 0-0.5 0.224-0.5 0.5v4.191l-4.724 2.362c-0.131 0.065-0.227 0.186-0.262 0.328s-0.006 0.293 0.080 0.412c0.44 0.607 0.906 2.114 0.906 3.707 0 4.178-3.296 8.5-8.812 8.5-5.066 0-9.188-4.122-9.188-9.188s4.122-9.187 9.188-9.187zM8.5 27c1.93 0 3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5-3.5 1.57-3.5 3.5 1.57 3.5 3.5 3.5zM8.5 21c1.378 0 2.5 1.122 2.5 2.5s-1.122 2.5-2.5 2.5-2.5-1.122-2.5-2.5 1.122-2.5 2.5-2.5z"></path>
+                        </svg>LOGIN</a></li>
+                  </ul>
+              </nav>
+      </div>
+    </header>
+
+    <div class="content bg">
+      <div class="content-body">
+
+
+        <form method="post" enctype="multipart/form-data" action="/upload">
+
+          <div class="box">
+
+            <div class="content-left">
+
+              <section class="in-form">
+
+                <!-- ユーザー名 -->
+                <span class="input input--form">
+                        <input class="input__field input__field--form" type="text" name="username" id="input-4">
+                        <label class="input__label input__label--form input__label--form-color-1" for="input-4">
+                          <span class="input__label-in-form input__label-in-form--form">
+                            <i style="margin: 10px;" class="fa fa-user fa-large"></i>USERNAME
+                          </span>
+                        </label>
+                </span>
+
+                <!-- <div id="Sample_user" name="Sample2_form" class="formbox">
+                  <p name="userhead">　☆　ユーザー名</p>
+                  <input type="text" id="user" name="username" value="Username">
+                </div> -->
+
+                <!-- 写真タイトル -->
+                <span class="input input--form">
+                          <input class="input__field input__field--form" type="text" id="input-4" name="title">
+                          <label class="input__label input__label--form input__label--form-color-1" for="input-4">
+                            <span class="input__label-in-form input__label-in-form--form">
+                              <i style="margin: 10px;" class="fa fa-pencil fa-large"></i>TITLE
+                            </span>
+                          </label>
+                </span>
+
+                <!-- <div id="Sample_title" name="Sample1_form" class="formbox">
+                  <p>　☆　タイトル</p>
+                  <input type="text" id="titlei" name="title" value="Title"></br></br>
+                </div> -->
+
+                <!-- コメント -->
+                <span class="input input--minoru">
+                    <textarea class="input__field input__field--minoru" type="text" id="input-13" name="comment"></textarea>
+                    <label class="input__label input__label--minoru" for="input-13">
+                       <span class="input__label-in-form input__label-in-form--minoru">
+                         <i style="margin: 10px;" class="fa fa-comment fa-large"></i>COMMENT
+                       </span>
+                    </label>
+                </span>
+
+              </section>
+
+            </div>
+
+            <div class="content-right">
+
+              <!-- 写真投稿 -->
+              <span class="form-title">
+                <i style="margin: 10px;" class="fa fa-picture-o fa-large"></i>PICTURE</br>
+              </span>
+              <p style="color:tomato; margin:5em 0 0 1em;">※緯度経度を算出するため、緯度経度の情報のない写真はエラーとなり、</br>アップロードできません。</p>
+              <!--<div id="dropzone">
+                  <form action="/file-upload" class="dropzone needsclick" id="demo-upload">
+                      <div class="fallback">
+                          <div class="dz-message needsclick">Drop files here or click to upload.<br/>
+                            <input type="file" id="image_file" value="ファイルを選択" name="picture">
+                            <span class="note needsclick">(This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)</span>
+                            <input type="file" id="image_file" value="ファイルを選択" name="picture">
+                          </div>
+                      </div>
+                  </form>
+              </div>-->
+              <input type="file" id="image_file" value="ファイルを選択" name="picture"></br>
+              <!-- <div id="dropzone" effectAllowed="move">
+                <p>ここに写真をドラッグしてください</br></br>
+                <p>またはファイルを選択してください</p>
+                <input type="file" id="image_file" value="ファイルを選択" name="picture">
+              </div>
+              <ul id="files" name="picture"></ul>
+              <script src="javascripts/sample4a.js"></script> -->
+
+              <!-- コメント投稿 -->
+              <!-- <div id="Sample_comment" class="formbox">
+                <p>　☆　コメント</p>
+                <input type="text" id="commenti" name="comment" value="Comment">
+              </div> -->
+
+              <!-- タグ -->
+              <!-- <span class="form-title">
+                <i style="margin: 10px;" class="fa fa-tag fa-large"></i>TAG
+              </span> -->
+              <span class="input input--form" style="margin: 0px;">
+                        <input class="input__field input__field--form" type="text" id="input-4" name="tag">
+                        <label class="input__label input__label--form input__label--form-color-1" for="input-4">
+                          <span class="input__label-in-form input__label-in-form--form">
+                            <i style="margin: 10px;" class="fa fa-tag fa-large"></i>TAG
+                          </span>
+                        </label>
+              </span>
+              <!-- <div class="checkbox02">
+                <label>
+                  <input type="checkbox" name="checkbox01[]" class="checkbox01-input">
+                  <span class="checkbox01-parts">チェックボックス01</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="checkbox01[]" class="checkbox01-input">
+                  <span class="checkbox01-parts">チェックボックス02</span>
+                </label>
+                <label>
+                  <input type="checkbox" name="checkbox01[]" class="checkbox01-input">
+                  <span class="checkbox01-parts">チェックボックス03</span>
+                </label>
+              </div> -->
+              <div class="checkbox02">
+                <% for item in @messages : %>
+                  <label>
+                    <input type="checkbox" name="checkbox01[]" value="<%= item.tag %>" class="checkbox01-input">
+                    <span for="<%= item.tag %>" class="checkbox01-parts"><%= item.tag %></span>
+                  </label>
+                <% end %>
+              </div>
+              <!-- <div id="show1">まだチェックされてません</div> -->
+
+            </div>
+
+          </div>
+
+              <!-- 送信ボタン -->
+              <div class="button">
+                <input type="submit" value="送信" class="square_btn"></br>
+              </div>
+              <!-- <div class="formbox">
+                <input type="submit" value="送信" class="square_btn"></br>
+              </div> -->
+
+          </form>
+
+      </div>
+    </div>
+
+  <ul>
+    <% for item in @messages : %>
+      <li><%= item.title %><br/><%= item.tag %><img src="/uploads/<%= item.file %>" width="300"></li>
+    <% end %>
+  </ul>
