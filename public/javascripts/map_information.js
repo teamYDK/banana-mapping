@@ -376,7 +376,19 @@ function initMap(){
 
 
     google.maps.event.addListener(marker, 'click', function() {
-      showInfoWindow(this);
+      /*showInfoWindow(this);*/
+      $(this).blur();  //ボタンをフォーカスから離す
+      if( $( "modal-overlay")[0]) return false;
+
+      //オーバーレイの出現
+      $("body").append();
+      $("modal-overlay").fadeIn("slow");
+
+      centeringModalSyncer();
+
+      $(this).fadeIn("slow");
+
+      
     });
 
     /*marker.addListener('click', function() {
