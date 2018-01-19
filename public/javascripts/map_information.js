@@ -290,6 +290,7 @@ function initMap(){
     if(infowindow) {
       infowindow.close();
     }
+    if( $( "modal-overlay")[0]) return false;
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
@@ -310,9 +311,29 @@ function initMap(){
 
                      '</div>';
 
-    infowindow = new google.maps.InfoWindow({
-      content: contents02
+    $("body").append(contents02);
+    $("body").append('<div id="modal-overlay"></div>');
+    $("modal-overlay").fadeIn("slow");
+
+    centeringModalSyncer();
+
+    $("#modal-content").fadeIn("slow");
+
+    $("modal-overlay,#modal-close").unbind().click( function() {
+
+      $("#modal-content,#modal-overlay").fadeOut("slow", function(){
+
+        $('#modal-overlay').remove();
+      });
     });
+    //marker Object から titleとcontentを取得して表示させる
+    var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
+      + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
+      + markerObj.comments;
+
+    /*infowindow = new google.maps.InfoWindow({
+      content: contents02
+    });*/
     return infowindow.open(map, markerObj);
   };
 
@@ -378,17 +399,8 @@ function initMap(){
     google.maps.event.addListener(marker, 'click', function() {
       /*showInfoWindow(this);*/
       $(this).blur();  //ボタンをフォーカスから離す
-      if( $( "modal-overlay")[0]) return false;
+      showInfoWindow(this);
 
-      //オーバーレイの出現
-      $("body").append();
-      $("modal-overlay").fadeIn("slow");
-
-      centeringModalSyncer();
-
-      $(this).fadeIn("slow");
-
-      
     });
 
     /*marker.addListener('click', function() {
