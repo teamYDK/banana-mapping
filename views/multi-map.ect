@@ -40,6 +40,21 @@
                   document.write('<a href="#tabpage', i, '"style="z-index:0;">MENU0', i, '</a>');
                 }
            </script> -->
+           <script>
+             var myMarkers = [
+               <% for result2 in @tags : %>
+                {
+                  username: '<%= result.username %>',
+                  position: [<%= result.lat %>, <%= result.lon %>],
+                  title: '<%= result.title %>',
+                  comment: '<%=  result.comment %>',
+                  file: '<%= result.file %>',
+                  tag: '<%= result.tag %>'
+                },
+                <% end %>
+              ];
+            </script>
+
           </p>
 
           <script src="javascripts/map_dataimport.js"></script>

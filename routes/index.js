@@ -146,7 +146,8 @@ router.post('/upload', function(req, res) {//入力データを読み込む
               comment: req.body.comment,
               lat: lat,
               lon: lon,
-              file: imagePath
+              file: imagePath,
+              tag: req.body.tag
             });
           });
         }
