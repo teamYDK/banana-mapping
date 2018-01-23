@@ -126,7 +126,7 @@ router.post('/upload', function(req, res) {//入力データを読み込む
           var firetagRef = firebase.database().ref('tag');
           var tagRef = messagesRef.child('tags');
           cloudinary.uploader.upload(req.file.path, function(result) {
-            var imagePath = result.url;
+            var imagePath = result.secure_url;
             console.log(result)
             messagesRef.push({ // ...　囲んでる部分の描き方は変わらない 非同期処理
               username: req.body.username,

@@ -290,7 +290,7 @@ function initMap(){
     if(infowindow) {
       infowindow.close();
     }
-    if( $( "modal-overlay")[0]) return false;
+    if( $( "#modal-overlay")[0]) return false;
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
@@ -313,13 +313,13 @@ function initMap(){
 
     $("body").append(contents02);
     $("body").append('<div id="modal-overlay"></div>');
-    $("modal-overlay").fadeIn("slow");
+    $("#modal-overlay").fadeIn("slow");
 
     centeringModalSyncer();
 
     $("#modal-content").fadeIn("slow");
 
-    $("modal-overlay,#modal-close").unbind().click( function() {
+    $("#modal-overlay,#modal-close").unbind().click( function() {
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
