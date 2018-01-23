@@ -339,6 +339,8 @@ function initMap(){
       showInfoWindow(this);
     });
 
+    showTab(this);
+
   }
 
  }
