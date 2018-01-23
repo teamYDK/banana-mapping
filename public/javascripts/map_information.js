@@ -257,9 +257,7 @@ function initMap(){
     if(infowindow) {
       infowindow.close();
     }
-    if( $( "#modal-overlay")[0]) {
-      $("modal-overlay").remove();
-    }
+    if( $( "#modal-overlay")[0]) return false;
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
@@ -292,7 +290,7 @@ function initMap(){
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
-        $("#modal-overlay,#modal-content").remove();
+        $("#modal-overlay").remove();
       });
     });
 
@@ -302,6 +300,16 @@ function initMap(){
     /*return infowindow.open(map, markerObj);*/
   };
 
+  for(var i=0, l=myMarkers.length; i<l; i+=1) {
+      var markerData = myMarkers[i],
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng( markerData.position[0], markerData.position[1] ),
+        usename: markerData.username,
+        title: markerData.title,
+        comments: markerData.comment,
+        file: markerData.file,
+        map: map
+      });
 
     google.maps.event.addListener(marker, 'click', function() {
       /*showInfoWindow(this);*/
