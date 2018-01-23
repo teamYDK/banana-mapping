@@ -251,46 +251,15 @@ function initMap(){
   // Map
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-
-    //var contentString =
-
-    /*'<ul>'+
-        '<li><%= result.title %><br/><img src="/uploads/<%= result.file %>" width="300"></li>'+
-    '</ul>';*/
-
-	/*'<!-- <div id="modal-overlay"></div> -->'+
-	'<div class="ex_2">'+
-	'<!-- モーダルウインドウ -->'+
-	'<div id="modal-content">'+
-	'<form id="detail">'+
-	'<p id="username">UserName</p>'+
-	'<hr>'+
-	'<p id="comment">Comment</p>'+
-	'<hr>'+
-	'<p>Like　Comment</p>'+
-	'<hr>'+
-	'</form>'+
-	'<img src="picture/Paris.JPG">'+
-	'<p>'+
-	'<a id="modal-close" class="button-link">'+
-	'<p id="close">閉じる</p>'+
-	'</a>'+
-	'</p>'+
-	'<!-- モーダルウィンドウのコンテンツの終了 -->'+
-	'</div>'+
-	'<p>'+
-	'<a id="modal-open" class="button-link"></a>'+
-	'</p>'+
-	'<!-- ここまでモーダルウィンドウ -->'+
-	'</div>';*/
-
   var infowindow;
 
   var showInfoWindow = function(markerObj) {
     if(infowindow) {
       infowindow.close();
     }
-    if( $( "#modal-overlay")[0]) return false;
+    if( $( "#modal-overlay")[0]) {
+      $("modal-overlay").remove();
+    }
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
@@ -323,73 +292,15 @@ function initMap(){
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
-        $("#modal-overlay").remove();
+        $("#modal-overlay,#modal-content").remove();
       });
     });
 
     /*infowindow = new google.maps.InfoWindow({
       content: contents02
     });*/
-    return infowindow.open(map, markerObj);
+    /*return infowindow.open(map, markerObj);*/
   };
-
-
-
-  //var infowindow = new google.maps.InfoWindow({
-
-      /*<ul>
-        <% for item in @messages : %>
-          <li><%= item.title %><br/><img src="/uploads/<%= item.file %>" width="300"></li>
-        <% end %>
-      </ul>*/
-
-	//content: contentString
-  //maxWidth: 200
-
-  //'<div class="ex_2" style="left: 275.5px; top: 133.5px;">'+
-  /* モーダルウインドウ */
-    /*'<div id="modal-content">'+
-
-      '<form id="detail">'+
-        '<p id="username">UserName</p>'+
-        '<hr>'+
-        '<p id="comment">Comment</p>'+
-        '<hr>'+
-        '<p>Like　Comment</p>'+
-        '<hr>'+
-      '</form>'+
-
-      '<img src="picture/Paris.JPG">'+
-
-      '<p>'+
-      '<a id="modal-close" class="button-link">'+
-      '<p id="close">閉じる</p>'+
-      '</a>'+
-      '</p>'+*/
-
-      /* モーダルウィンドウのコンテンツの終了 --> */
-      /*'</div>'+
-
-      '<p>'+
-      '<a id="modal-open" class="button-link">クリックするとモーダルウィンドウが開きます。</a>'+
-      '</p>'+*/
-      /* ここまでモーダルウィンドウ */
-      //'</div>'
-
-
-    //});
-    /*var mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']});*/
-
-    for(var i=0, l=myMarkers.length; i<l; i+=1) {
-      var markerData = myMarkers[i],
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng( markerData.position[0], markerData.position[1] ),
-        usename: markerData.username,
-        title: markerData.title,
-        comments: markerData.comment,
-        file: markerData.file,
-        map: map
-      });
 
 
     google.maps.event.addListener(marker, 'click', function() {
