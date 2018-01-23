@@ -339,7 +339,7 @@ function initMap(){
       showInfoWindow(this);
     });
 
-    showTab(this);
+    showTab();
 
   }
 

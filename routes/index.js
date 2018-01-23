@@ -123,8 +123,9 @@ router.post('/upload', function(req, res) {//入力データを読み込む
 
           var firebaseRef =firebase.database().ref();//追加
           var messagesRef = firebaseRef.child('messages');// データベースの参照の取得
-          var firetagRef = firebase.database().ref('tag');
-          var tagRef = messagesRef.child('tags');
+
+          var tagRef = firebaseRef.child('tags');
+
           cloudinary.uploader.upload(req.file.path, function(result) {
             var imagePath = result.secure_url;
             console.log(result)
@@ -138,6 +139,14 @@ router.post('/upload', function(req, res) {//入力データを読み込む
               tag: req.body.tag
             }).then(function(){
               res.send("Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
+            });
+            firebaseRef.child(req.body.tag).set({
+              username: req.body.username,
+              title: req.body.title,
+              comment: req.body.comment,
+              lat: lat,
+              lon: lon,
+              file: imagePath
             });
           });
         }
