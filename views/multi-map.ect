@@ -72,7 +72,7 @@
 
                  '<ul>'+
                    '<% for result in @messages : %>'+
-                      '<li><%= result.title %><br/><img src="/uploads/<%= result.file %>" width="300"><br></li>'+
+                      '<li><%= result.title %><br/><img src="<%= result.file %>" width="300"><br></li>'+
                       '<%= result.comment %>'
                    '<% end %>'
                  '</ul>';
