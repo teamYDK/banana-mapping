@@ -140,7 +140,7 @@ router.post('/upload', function(req, res) {//入力データを読み込む
             }).then(function(){
               res.send("Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
             });
-            firebaseRef.child(req.body.tag).set({
+            tagRef.child(req.body.tag).set({
               username: req.body.username,
               title: req.body.title,
               comment: req.body.comment,
