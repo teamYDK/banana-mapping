@@ -296,10 +296,6 @@ function initMap(){
       });
     });
 
-    /*infowindow = new google.maps.InfoWindow({
-      content: contents02
-    });*/
-    /*return infowindow.open(map, markerObj);*/
   };
 
   $( window ).resize( centeringModalSyncer ) ;
@@ -311,16 +307,19 @@ function initMap(){
     var w = $( window ).width() ;
     var h = $( window ).height() ;
 
-    // コンテンツ(#modal-content)の幅、高さを取得
-    // jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
-    //		var cw = $( "#modal-content" ).outerWidth( {margin:true} );
-    //		var ch = $( "#modal-content" ).outerHeight( {margin:true} );
     var cw = $( "#modal-content" ).outerWidth();
     var ch = $( "#modal-content" ).outerHeight();
 
     //センタリングを実行する
     $( "#modal-content" ).css( {"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"} ) ;
 
+  }
+
+  var showTab = function(markerObj) {
+
+    var tabheader = '<a href="#tabpage1" style="z-index:0">' + markerObj.tag + '</a>'
+
+    $("#tabcontrol").append(tabheader);
   }
 
   for(var i=0, l=myMarkers.length; i<l; i+=1) {
@@ -331,19 +330,14 @@ function initMap(){
         title: markerData.title,
         comments: markerData.comment,
         file: markerData.file,
+        tag: markerData.tag,
         map: map
       });
 
     google.maps.event.addListener(marker, 'click', function() {
-      /*showInfoWindow(this);*/
       $(this).blur();  //ボタンをフォーカスから離す
       showInfoWindow(this);
-
     });
-
-    /*marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });*/
 
   }
 
