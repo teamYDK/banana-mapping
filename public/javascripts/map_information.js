@@ -278,11 +278,11 @@ function initMap(){
 
                      '</div>';
 
-    $("body").append(contents02);
-    $("body").append('<div id="modal-overlay"></div>');
+    $("#map").append(contents02);
+    $("#map").append('<div id="modal-overlay"></div>');
     $("#modal-overlay").fadeIn("slow");
 
-    /*centeringModalSyncer();*/
+    centeringModalSyncer();
 
     $("#modal-content").fadeIn("slow");
 
@@ -299,6 +299,27 @@ function initMap(){
     });*/
     /*return infowindow.open(map, markerObj);*/
   };
+
+  $( window ).resize( centeringModalSyncer ) ;
+
+  //センタリングを実行する関数
+  function centeringModalSyncer() {
+
+    //画面(ウィンドウ)の幅、高さを取得
+    var w = $( window ).width() ;
+    var h = $( window ).height() ;
+
+    // コンテンツ(#modal-content)の幅、高さを取得
+    // jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
+    //		var cw = $( "#modal-content" ).outerWidth( {margin:true} );
+    //		var ch = $( "#modal-content" ).outerHeight( {margin:true} );
+    var cw = $( "#modal-content" ).outerWidth();
+    var ch = $( "#modal-content" ).outerHeight();
+
+    //センタリングを実行する
+    $( "#modal-content" ).css( {"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"} ) ;
+
+  }
 
   for(var i=0, l=myMarkers.length; i<l; i+=1) {
       var markerData = myMarkers[i],
