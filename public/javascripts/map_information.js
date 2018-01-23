@@ -257,7 +257,9 @@ function initMap(){
     if(infowindow) {
       infowindow.close();
     }
-    if( $( "#modal-overlay")[0]) return false;
+    if( $( "#modal-overlay")[0]) {
+      $("#modal-overlay").remove();
+    }
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
