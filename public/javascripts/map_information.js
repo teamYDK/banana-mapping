@@ -328,7 +328,7 @@ function initMap(){
     });
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
-      + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
+      + '<img src="' + markerObj.file + '" width="300">' + '<br />'
       + markerObj.comments;
 
     /*infowindow = new google.maps.InfoWindow({
