@@ -315,7 +315,7 @@ function initMap(){
     $("body").append('<div id="modal-overlay"></div>');
     $("#modal-overlay").fadeIn("slow");
 
-    centeringModalSyncer();
+    /*centeringModalSyncer();*/
 
     $("#modal-content").fadeIn("slow");
 
@@ -323,13 +323,9 @@ function initMap(){
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
-        $('#modal-overlay').remove();
+        $("#modal-overlay").remove();
       });
     });
-    //marker Object から titleとcontentを取得して表示させる
-    var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
-      + '<img src="' + markerObj.file + '" width="300">' + '<br />'
-      + markerObj.comments;
 
     /*infowindow = new google.maps.InfoWindow({
       content: contents02
