@@ -301,7 +301,7 @@ function initMap(){
                         '<p id="username">' + markerObj.usename + '</p>' + '<hr>' +
                         '<p id="comment">' + markerObj.comments + '</p>' + '<hr>' +
                         '</form>' +
-                      '<img id=uploadimg src="uploads/' + markerObj.file + '">' +
+                      '<img id=uploadimg src="' + markerObj.file + '">' +
 
                       '<p>' +
                         '<a id="modal-close" class="button-link">' +
