@@ -257,7 +257,7 @@ function initMap(){
     if(infowindow) {
       infowindow.close();
     }
-    if( $( "#modal-overlay")[0]) {
+    else if( $( "#modal-overlay")[0]) {
       $("#modal-overlay").remove();
     }
     //marker Object から titleとcontentを取得して表示させる
@@ -292,7 +292,7 @@ function initMap(){
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
-        $("#modal-overlay").remove();
+        $("#modal-overlay,#modal-content").remove();
       });
     });
 
