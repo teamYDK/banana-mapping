@@ -12,69 +12,13 @@ firebase.initializeApp({
   databaseURL:"https://ydk-6f9ed.firebaseio.com"
 });
 
-//パスワードベースのアカウントを作成する
-/*firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: 'hzhffsjd1',
+  api_key: '714428761432166',
+  api_secret: 'IiT_eI1Ds1xFf7ItjP-IKtXU0jI'
 });
 
-//メールアドレスとパスワードを使用してユーザーのログインを行う
-firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-  //Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-});
-
-//SIGN OUT
-firebase.auth().signOut().then(function() {
-  // Sign-out successfull
-}).catch(function(error) {
-  // An error happened
-});
-
-//GET USER PROFILE
-if(user != null) {
-  name = user.displayName;
-  email = user.email;
-  photoUrl = user.photoUrl;
-  emaiilVertified = user.emaiilVertified;
-  uid = user.uid;
-}
-
-//ユーザーのプロフィールの更新
-user.updateProfile({
-  displayName: "Jane Q. User",
-  photoUrl: "https://example.com/jane-q-user/profile.jpg"
-}).then(function() {
-  //Update successfull.
-}).catch(function(error) {
-  //An error happened.
-});
-
-//ユーザのメールアドレスを設定する
-user.updateEmail("user@example.com").then(function() {
-  //Upadate sucessful.
-}).catch.(function(error) {
-  // An error happend.
-});
-
-//ユーザーのパスワードを設定する
-var newPassword = getASecureRandomPassword();
-user.updatePassword(newPassword).then(function() {
-  // Update sucessful.
-}).catch(function(error) {
-  // An error happened.
-});
-
-//ユーザーの再認証
-var credential;
-// Prompt the user to re-provide their sign-in credentials
-user.reauthenticateWidthCredential(credential).then(function() {
-  // User re-authenticated.
-}).catch(function() {
-  // An error happened.
-});*/
 
 /* GET home page. */
 router.get('/', function(req, res, next) {//文字の表示
@@ -168,7 +112,6 @@ router.post('/upload', function(req, res) {//入力データを読み込む
         return dms[0] + ( dms[1] * 60 + dms[2] ) / 3600
       }
 
-
 /* 写真からの緯度経度のぬきだし */
       new ExifImage({ image : req.file.path }, function (error, image) {
         if (error) {
@@ -178,24 +121,24 @@ router.post('/upload', function(req, res) {//入力データを読み込む
           var lon = convert((image['gps']['GPSLongitude']));//スコープの範囲気をつける
           console.log(lat, lon);
 
-/* データベースに入力内容を代入 */
-/*usersRef.child("tag").set({
-  tag:  req.body.tag
-});*/
           var firebaseRef =firebase.database().ref();//追加
           var messagesRef = firebaseRef.child('messages');// データベースの参照の取得
           var firetagRef = firebase.database().ref('tag');
           var tagRef = messagesRef.child('tags');
-          messagesRef.push({ // ...　囲んでる部分の描き方は変わらない 非同期処理
-            username: req.body.username,
-            title:    req.body.title,
-            comment:  req.body.comment,
-            lat:      lat,//リクエストした値でない
-            lon:      lon,//リクエストした値でない
-            file:     req.file.filename,
-            tag: req.body.tag
-          }).then(function(){
-            res.send("Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
+          cloudinary.uploader.upload(req.file.path, function(result) {
+            var imagePath = result.url;
+            console.log(result)
+            messagesRef.push({ // ...　囲んでる部分の描き方は変わらない 非同期処理
+              username: req.body.username,
+              title:    req.body.title,
+              comment:  req.body.comment,
+              lat:      lat,//リクエストした値でない
+              lon:      lon,//リクエストした値でない
+              file:     imagePath,
+              tag: req.body.tag
+            }).then(function(){
+              res.send("Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
+            });
           });
         }
       });

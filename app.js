@@ -11,6 +11,13 @@ var users = require('./routes/users');
 
 var app = express();
 
+var cloudinary = require('cloudinary');
+cloudinary.config({
+  cloud_name: 'hzhffsjd1',
+  api_key: '714428761432166',
+  api_secret: 'IiT_eI1Ds1xFf7ItjP-IKtXU0jI'
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('ect', ECT({ watch: true, root: __dirname + '/views', ext: '.ect' }).render);
