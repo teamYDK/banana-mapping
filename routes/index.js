@@ -75,6 +75,37 @@ router.get('/uploads/:fileid', function(req, res){//画像の表示
   res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
 });
 
+router.get('/company', function(req, res, next) {//文字の表示
+  var query = firebase.database().ref('messages').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      messages.push(childSnapshot.val());
+    });
+    res.render('company', { title: 'My Mapping', messages: messages });
+  });
+});
+
+router.get('/uploads/:fileid', function(req, res){//画像の表示
+  var buf = fs.readFileSync(result.url);
+  res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
+});
+
+//タグを新規登録する画面する画面は別にあったほうがよい
+router.get('/tags', function(req, res) {
+  var query = firebase.database().ref('tags').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      tags.push(childSnapshot.val());
+    });
+    res.render('tags', { title: 'new tags', tags: tags });
+  });
+// ここでタグの表示と登録フォームを出す　messagesデータベースに何を投稿しようとしているのか
+});
+
 router.post('/tags', function(req, res) {
   var firebaseRef =firebase.database().ref();
   var tagsRef = firebaseRef.child('tags');// データベースの参照の取得
