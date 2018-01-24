@@ -34,7 +34,6 @@ router.get('/', function(req, res, next) {//文字の表示
 });
 
 router.get('/multi-map', function(req, res, next) {//文字の表示
-
   var query = firebase.database().ref('messages').orderByKey();
   query.once('value').then(function(snapshot) {
     console.log(snapshot.exportVal());
