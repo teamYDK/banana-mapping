@@ -315,12 +315,12 @@ function initMap(){
 
   }
 
-  var showTab = function(markerObj) {
+  /*var showTab = function(markerObj) {
 
     var tabheader = '<a href="#tabpage1" style="z-index:0">' + markerObj.tag + '</a>'
 
     $("#tabcontrol").append(tabheader);
-  }
+  }*/
 
   for(var i=0, l=myMarkers.length; i<l; i+=1) {
       var markerData = myMarkers[i],
@@ -338,8 +338,6 @@ function initMap(){
       $(this).blur();  //ボタンをフォーカスから離す
       showInfoWindow(this);
     });
-
-    showTab();
 
   }
 
