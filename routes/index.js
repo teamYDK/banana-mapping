@@ -59,7 +59,7 @@ router.get('/multi-map', function(req, res, next) {//文字の表示
     snapshot.forEach(function(childSnapshot) {
       messages.push(childSnapshot.val());
     });
-    res.render('index', { title: 'My Mapping', messages: messages });
+    res.render('muti-map', { title: 'My Mapping', messages: messages });
   });
 });
 
