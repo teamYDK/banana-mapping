@@ -87,7 +87,81 @@
                  </script>
 
                </span>
-  			       <span class="tby" id="tabpage2">
+               <span class="tby" id="tabpage2">
+                 <a class="btn btn-icon btn-facebook" href="/map"><i class="fa fa-eye"></i><p>Look In Full Screen</p></a>
+                 <div class="sns_button twitter">
+                   <a href="###" title="Tweet"><i class="fa fa-twitter"></i></a>
+                 </div>
+                 <div class="clear"></div>
+
+                 <div id="map"></div>
+                 <!-- <script src="javascripts/map_dataimport.js"></script> -->
+
+                 <script>
+
+                 var contentString =
+
+                 '<ul>'+
+                   '<% for result in @messages : %>'+
+                      '<li><%= result.title %><br/><img src="<%= result.file %>" width="300"><br></li>'+
+                      '<%= result.comment %>'
+                   '<% end %>'
+                 '</ul>';
+
+                 var myMarkers = [
+                   <% for result in @messages : %>
+                    {
+                      username: '<%= result.username %>',
+                      position: [<%= result.lat %>, <%= result.lon %>],
+                      title: '<%= result.title %>',
+                      comment: '<%=  result.comment %>',
+                      file: '<%= result.file %>',
+                      tag: '<%= result.tag %>'
+                    },
+                    <% end %>
+                  ];
+
+                 </script>
+
+               </span>
+               <span class="tby" id="tabpage3">
+                 <a class="btn btn-icon btn-facebook" href="/map"><i class="fa fa-eye"></i><p>Look In Full Screen</p></a>
+                 <div class="sns_button twitter">
+                   <a href="###" title="Tweet"><i class="fa fa-twitter"></i></a>
+                 </div>
+                 <div class="clear"></div>
+
+                 <div id="map"></div>
+                 <!-- <script src="javascripts/map_dataimport.js"></script> -->
+
+                 <script>
+
+                 var contentString =
+
+                 '<ul>'+
+                   '<% for result in @messages : %>'+
+                      '<li><%= result.title %><br/><img src="<%= result.file %>" width="300"><br></li>'+
+                      '<%= result.comment %>'
+                   '<% end %>'
+                 '</ul>';
+
+                 var myMarkers = [
+                   <% for result in @messages : %>
+                    {
+                      username: '<%= result.username %>',
+                      position: [<%= result.lat %>, <%= result.lon %>],
+                      title: '<%= result.title %>',
+                      comment: '<%=  result.comment %>',
+                      file: '<%= result.file %>',
+                      tag: '<%= result.tag %>'
+                    },
+                    <% end %>
+                  ];
+
+                 </script>
+
+               </span>
+  			       <!-- <span class="tby" id="tabpage2">
                  タブ2の中身<br>
                  <h2>■JavaScript：</h2>
                  <ul>
@@ -108,7 +182,7 @@
                    <li><a href="http://allabout.co.jp/gm/gc/23929/">100種類以上ある！ ウェブ上で使える矢印記号</a></li>
                    <li><a href="http://allabout.co.jp/gm/gc/23895/">ハートマークを表示したい！ ハート記号の出し方</a></li>
                  </ul>
-               </span>
+               </span> -->
   		    </div>
 
         </div>
