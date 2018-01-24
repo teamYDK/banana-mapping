@@ -35,10 +35,10 @@ router.get('/', function(req, res, next) {//文字の表示
 
 router.get('/multi-map', function(req, res, next) {//文字の表示
   var query = firebase.database().ref('messages').orderByKey();
-  var taglist = firebase.database().child('tags');
+  /*var taglist = firebase.database().child('tags');
   var handles = [];
 
-  /*function getUserTagItem() {
+  function getUserTagItem() {
     taglist.on("child_added", function(snap) {
       var userRef = firebase.database().child('messages/' + snap.key);
       var messages = [];
