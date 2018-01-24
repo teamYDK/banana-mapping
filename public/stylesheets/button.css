@@ -33,7 +33,6 @@
   -moz-transition:all .5s;
   transition:all .5s;
   overflow:hidden;
-  float: right;
 }
 
 .btn:hover {
@@ -100,4 +99,12 @@
 
 .btn-facebook > p {
   background:#008bcc;
+}
+
+.btn-github:hover > i,.btn-github:focus > i {
+  color: #6e5494;
+}
+
+.btn-github > p {
+  background: #6e5494;
 }
