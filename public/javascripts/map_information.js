@@ -343,7 +343,7 @@ function initMap(){
 
   }
 
-  for(var i=0, l=myTag.length; i<l; i+=1) {
+  /*for(var i=0, l=myTag.length; i<l; i+=1) {
       var tagData = myTag[i],
       tag = new google.maps.Marker({
         position: new google.maps.LatLng( markerData.position[0], markerData.position[1] ),
@@ -362,7 +362,7 @@ function initMap(){
 
     showTab();
 
-  }
+  }*/
 
  }
 
