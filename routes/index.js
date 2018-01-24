@@ -35,31 +35,15 @@ router.get('/', function(req, res, next) {//文字の表示
 
 router.get('/multi-map', function(req, res, next) {//文字の表示
   var query = firebase.database().ref('messages').orderByKey();
-  /*var taglist = firebase.database().child('tags');
-  var handles = [];
 
-  function getUserTagItem() {
-    taglist.on("child_added", function(snap) {
-      var userRef = firebase.database().child('messages/' + snap.key);
-      var messages = [];
-      userRef.once("value").then(function(userSnap) {
-        messages.push(userSnap.val());
-      });
-      handles.push(fn);
-      res.render('multi-map', { title: 'My Mapping', messages: messages });
-    });
-    handlers.forEach(function(fn) {
-      userRef.off('value', fn);
-    });
-  }*/
-
+  var query = firebase.database().ref('messages').orderByKey();
   query.once('value').then(function(snapshot) {
     console.log(snapshot.exportVal());
     var messages = [];
     snapshot.forEach(function(childSnapshot) {
       messages.push(childSnapshot.val());
     });
-    res.render('muti-map', { title: 'My Mapping', messages: messages });
+    res.render('multi-map', { title: 'My Mapping', messages: messages });
   });
 });
 
