@@ -35,13 +35,31 @@ router.get('/', function(req, res, next) {//文字の表示
 
 router.get('/multi-map', function(req, res, next) {//文字の表示
   var query = firebase.database().ref('messages').orderByKey();
+  var taglist = firebase.database().child('tags');
+  var handles = [];
+
+  /*function getUserTagItem() {
+    taglist.on("child_added", function(snap) {
+      var userRef = firebase.database().child('messages/' + snap.key);
+      var messages = [];
+      userRef.once("value").then(function(userSnap) {
+        messages.push(userSnap.val());
+      });
+      handles.push(fn);
+      res.render('multi-map', { title: 'My Mapping', messages: messages });
+    });
+    handlers.forEach(function(fn) {
+      userRef.off('value', fn);
+    });
+  }*/
+
   query.once('value').then(function(snapshot) {
     console.log(snapshot.exportVal());
     var messages = [];
     snapshot.forEach(function(childSnapshot) {
       messages.push(childSnapshot.val());
     });
-    res.render('multi-map', { title: 'My Mapping', messages: messages });
+    res.render('index', { title: 'My Mapping', messages: messages });
   });
 });
 
@@ -73,20 +91,6 @@ router.get('/map', function(req, res, next) {//文字の表示
 router.get('/uploads/:fileid', function(req, res){//画像の表示
   var buf = fs.readFileSync('./uploads/' + req.params.fileid);
   res.send(buf, { 'Content-Type': 'image/jpeg' }, 200);
-});
-
-//タグを新規登録する画面する画面は別にあったほうがよい
-router.get('/tags', function(req, res) {
-  var query = firebase.database().ref('tags').orderByKey();
-  query.once('value').then(function(snapshot) {
-    console.log(snapshot.exportVal());
-    var messages = [];
-    snapshot.forEach(function(childSnapshot) {
-      tags.push(childSnapshot.val());
-    });
-    res.render('tags', { title: 'new tags', tags: tags });
-  });
-// ここでタグの表示と登録フォームを出す　messagesデータベースに何を投稿しようとしているのか
 });
 
 router.post('/tags', function(req, res) {

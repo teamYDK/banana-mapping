@@ -41,15 +41,15 @@
                 }
            </script> -->
            <!-- <script>
-             var mytag = [
+             var myTag = [
                <% for result2 in @tags : %>
                 {
-                  username: '<%= result.username %>',
-                  position: [<%= result.lat %>, <%= result.lon %>],
-                  title: '<%= result.title %>',
-                  comment: '<%=  result.comment %>',
-                  file: '<%= result.file %>',
-                  tag: '<%= result.tag %>'
+                  username: '<%= result2.username %>',
+                  position: [<%= result2.lat %>, <%= result2.lon %>],
+                  title: '<%= result2.title %>',
+                  comment: '<%=  result2.comment %>',
+                  file: '<%= result2.file %>',
+                  tag: '<%= result2.tag %>'
                 },
                 <% end %>
               ];

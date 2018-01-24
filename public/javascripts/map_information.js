@@ -343,6 +343,27 @@ function initMap(){
 
   }
 
+  for(var i=0, l=myTag.length; i<l; i+=1) {
+      var tagData = myTag[i],
+      tag = new google.maps.Marker({
+        position: new google.maps.LatLng( markerData.position[0], markerData.position[1] ),
+        usename: markerData.username,
+        title: markerData.title,
+        comments: markerData.comment,
+        file: markerData.file,
+        tag: markerData.tag,
+        map: map
+      });
+
+    google.maps.event.addListener(marker, 'click', function() {
+      $(this).blur();  //ボタンをフォーカスから離す
+      showInfoWindow(this);
+    });
+
+    showTab();
+
+  }
+
  }
 
   google.maps.event.addDomListener(window, 'load', initialize);
