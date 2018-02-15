@@ -6,8 +6,8 @@ $.fn.simpleFilter = function(options) {
 	/*var imgWidth = this.width();
 	var imgHeight = this.height();*/
 
-	var imgWidth = img.width;
-	var imgHeight = img.height;
+	var imgWidth = img.width();
+	var imgHeight = img.height();
 
 	/*var canvas = $("<canvas>");*/
 
