@@ -9,11 +9,13 @@ $.fn.simpleFilter = function(options) {
 	var imgWidth = img.width || img.naturalWidth;
 	var imgHeight = img.height || img.naturalHeight;
 
-	var canvas = $("<canvas>");
+	/*var canvas = $("<canvas>");*/
+
+	var canvas = document.getElementById('myCanvas');
 
 	// set the acutal w and h
-	canvas[0].width = imgWidth;
-	canvas[0].height = imgHeight;
+	/*canvas[0].width = imgWidth;
+	canvas[0].height = imgHeight;*/
 
 	var ctx = canvas[0].getContext('2d');
 
