@@ -3,8 +3,11 @@ $.fn.simpleFilter = function(options) {
 
 	// first create a canvas that is the same size as the image
 	var img = this[0]; // grab the first one
-	var imgWidth = this.width();
-	var imgHeight = this.height();
+	/*var imgWidth = this.width();
+	var imgHeight = this.height();*/
+
+	var imgWidth = image.width || image.naturalWidth;
+	var imgHeight = image.height || image.naturalHeight;
 
 	var canvas = $("<canvas>");
 
