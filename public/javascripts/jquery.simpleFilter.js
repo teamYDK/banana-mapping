@@ -6,12 +6,10 @@ $.fn.simpleFilter = function(options) {
 	/*var imgWidth = this.width();
 	var imgHeight = this.height();*/
 
-	var imgWidth = img.width();
-	var imgHeight = img.height();
+	var imgWidth = img.width;
+	var imgHeight = img.height;
 
-	/*var canvas = $("<canvas>");*/
-
-	var canvas = document.getElementById('myCanvas');
+	var canvas = $("<canvas>");
 
 	// set the acutal w and h
 	canvas[0].width = imgWidth;
