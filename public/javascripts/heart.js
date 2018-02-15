@@ -1,7 +1,7 @@
 $(function() {
   $(window).load(function() {
-    var image = document.getElementById('background');
-    image.crossOrigin = 'anonymous';
+    /*var image = document.getElementById('background');
+    image.crossOrigin = 'anonymous';*/
 
     $('img.filter1').simpleFilter({
 	     filter : 'grayscale',
