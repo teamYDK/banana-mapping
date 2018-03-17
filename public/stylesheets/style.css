@@ -14,31 +14,49 @@
 
 html, body {
     height: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+img { -ms-interpolation-mode: bicubic; }
+
+audio, canvas, video {
+  display: inline-block;
 }
 
 body {
     /*font-family: "Lato", “游ゴシック Medium”, “Yu Gothic Medium”, sans-serif;*/ /*全体のフォント*/
     font-family: "Lato", "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
     font-weight: lighter;
+    -webkit-text-size-adjust: 100%;
     position: relative;
     margin: 0;
-    background: #eee;
+    /*background: #fafafa;*/
 }
 
-.content {
-    min-height: 100vh;
+article.content {
+    /*min-height: 100vh;*/
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin: 0 auto 0;
+    max-width: 935px;
+    width: 100%;
 }
 
 .content.bg {
-    position: relative;
+  min-height: 750px;
+  position: relative;
+  background-color: #fafafa;
 }
 
 .content-body {
-    padding: 60px 60px;
-    padding-top: 150px;
+    /*padding: 0px 20px;*/
+    padding-top: 77px;
     line-height: 2em;
     position: relative;
     z-index: 2;
+    background: #fafafa;
 }
 
 .clear {
@@ -46,12 +64,12 @@ body {
 }
 
 
-article {
+/*article {
 			height: 1000px;
 			margin: 100px auto;
 			text-align: center;
 			line-height: 1.9;
-}
+}*/
 
 article p {
 			margin-bottom: 1em;
@@ -59,6 +77,10 @@ article p {
 
 a {
 			color: #0b8793;
+}
+
+ul {
+  list-style: none;
 }
 
 #main-visual {
@@ -84,12 +106,43 @@ footer a {
 
 
 .inner {
-			width: 980px;
+			/*width: 980px;*/
 			margin: 0 auto;
+      padding: 0px 40px;
 }
 
 .inner:after {
 			content: "";
 			clear: both;
 			display: block;
+}
+
+::-webkit-input-placeholder {
+    color:    #a1a1a1;
+    font-weight: lighter;
+}
+:-moz-placeholder {
+    color:    #a1a1a1;
+    font-weight: lighter;
+}
+
+@media only screen and (max-device-width : 480px){
+/* スマートフォンだけ以下を適用 */
+
+body {
+ 		  font-size: 10px;
+  	}
+.content-body {
+        padding: 78px 5px 0px 5px;
+      }
+
+}
+
+@media (min-width: 736px) {
+  article.content {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 60px 20px 0;
+    width: calc(100% - 40px);
+  }
 }

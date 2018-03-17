@@ -1,0 +1,531 @@
+#timeline article, #timeline div, #timeline footer, #timeline header, #timeline section {
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  border: 0 solid #000;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#timeline a, a:visited {
+    color: #003569;
+    text-decoration: none;
+}
+
+#timeline body, button, input, textarea {
+    /*font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;*/
+    font-size: 14px;
+    line-height: 18px;
+}
+
+div.time-cards {
+  /*float: left;*/
+  margin-right: 28px;
+  max-width: 614px;
+  width: 100%;
+}
+
+#timeline div.time--cards {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+#timeline header.time-card-pro {
+  display: flex;
+  flex-shrink: 0;
+  margin: 0;
+  position: relative;
+  border-bottom: 1px solid #e6e6e6;
+  height: 60px;
+  padding: 16px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+#timeline div.time-card-pro-pic {
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: none;
+  -ms-flex: none;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#timeline img.time-card-avatar-image {
+  background-color: #fafafa;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+#timeline div.time-card-pro-det {
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  margin-left: 12px;
+  overflow: hidden;
+
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding: 0;
+  position: relative;
+}
+
+#timeline div.time-card-pro-name {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  max-width: 100%;
+  display: flex;
+}
+
+#timeline a.time-card-pro--name /* , .time-card-pro--name:visited */ {
+  color: #262626;
+  -webkit-box-flex: 0;
+  -webkit-flex-grow: 0;
+  -ms-flex-positive: 0;
+  flex-grow: 0;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  margin-left: -5px;
+}
+
+#timeline div.time-card-place {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: flex;
+}
+
+#timeline a.time-card--place {
+  color: #262626;
+  max-width: 100%;
+  line-height: 15px;
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#timeline div.time-card--pic {
+  left: 0;
+  position: relative;
+  top: 0;
+}
+
+#timeline div.time-card-pic-cont {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  cursor: pointer;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#timeline div.time-card-pic--cont {
+  background-color: #efefef;
+  display: block;
+  width: 100%;
+}
+
+#timeline div.time-card-pic-img {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+#timeline img.time-card-pic-rimg {
+  height: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+#timeline div.time-card-pic--img {
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+#timeline div.time-card-pic-row {
+  margin-bottom: 15px;
+  margin-top: 15px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+#timeline div.time-card-pic--row {
+  table-layout: fixed;
+}
+
+#timeline table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+#timeline div.time-card-etc {
+  padding: 0 16px;
+}
+
+#timeline section.time-card-etc-mark {
+  margin-top: -30px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+#timeline a.mark-like {
+  display: inline-block;
+  margin-left: -8px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+#timeline span.card-heart-button {
+  /*background-position: -465px -182px;*/
+  height: 24px;
+  width: 24px;
+  background-image: url(https://goo.gl/NLUdLH);
+  background-position: -408px -156px;
+  background-repeat: no-repeat;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+#timeline a.mark-comment {
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+#timeline span.card-comment-button {
+  height: 24px;
+  width: 24px;
+  background-image: url(https://goo.gl/NLUdLH);
+  background-position: -408px -26px;
+  background-repeat: no-repeat;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+#timeline a.mark-save {
+  margin-left: auto;
+  margin-right: -8px;
+  display: inline-block;
+  background-color: transparent;
+  border: none;
+  padding: 8px;
+}
+
+#timeline span.card-save-button {
+  height: 24px;
+  width: 24px;
+  background-image: url(https://goo.gl/NLUdLH);
+  background-position: -104px -389px;
+  background-repeat: no-repeat;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+#timeline article.time-card-etc-act {
+  margin-bottom: 8px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+}
+
+#timeline div.time-card-etc--act {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  display: block;
+}
+
+#timeline a.act-name {
+  color: #262626;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  margin-left: -5px;
+}
+
+#timeline div.time-card-etc-comment {
+  margin-bottom: 4px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  min-height: 0;
+  overflow: auto;
+  margin-top: -5px;
+  padding-top: 5px;
+  overflow-anchor: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+#timeline ul.time-card-etc--comment {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding: 0;
+  margin: 0;
+}
+
+#timeline li.time-card-etc---comment:last-child {
+  padding-bottom: 0;
+}
+
+#timeline li.time-card-etc---comment {
+  overflow: hidden;
+  padding-bottom: 6px;
+  position: relative;
+  word-wrap: break-word;
+  margin-top: -5px;
+  padding-top: 5px;
+}
+
+#timeline a.time-card-post-name {
+  color: #262626;
+  margin-right: .3em;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 5px;
+  margin-left: -5px;
+}
+
+#timeline div.time-card-etc-time {
+  margin-bottom: 4px;
+  display: block;
+}
+
+#timeline a.time-card-etc--time {
+  color: #999;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+
+}
+
+#timeline time.time-card-post-time {
+  font-size: 10px;
+  letter-spacing: .2px;
+}
+
+#timeline section.time-card-etc-commentbox {
+  padding-right: 26px;
+  margin-top: 4px;
+  border-top: 1px solid #efefef;
+  color: #999;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  font-size: 14px;
+  line-height: 18px;
+  min-height: 56px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 16px 0;
+}
+
+#timeline form.time-card-etc--commentbox {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+#timeline textarea.time-card-textarea {
+  background: 0 0;
+    border: none;
+    color: #262626;
+    font-size: inherit;
+    height: 18px;
+    max-height: 80px;
+    outline: none;
+    padding: 0;
+    resize: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+}
+
+#timeline div.time-card-detail {
+  bottom: 0;
+  height: 52px;
+  right: 10px;
+  top: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: absolute;
+}
+
+#timeline button.time-card-detail-button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+}
+
+#timeline span.time-card-detail--button {
+  height: 16px;
+  width: 16px;
+  background-image: url(https://goo.gl/NLUdLH);
+  background-repeat: no-repeat;
+  background-position: -434px -345px;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  #timeline article.time-card {
+    margin-bottom: 60px;
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    margin-left: -1px;
+    margin-right: -1px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 736px) {
+  #timeline time.time-ps {
+    font-size: 15px;
+    line-height: 18px;
+  }
+}

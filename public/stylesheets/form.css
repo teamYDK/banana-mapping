@@ -1,11 +1,15 @@
+.other-formdet {
+  margin: 0 1em;
+}
+
 .input {
   position: relative;
   z-index: 1;
   display: inline-block;
-  margin: 1em;
+  /*margin: 1em;*/
   max-width: 350px;
   width: calc(100% - 2em);
-  vertical-align: top;
+  /*vertical-align: top;*/
 }
 
 .input__field {
@@ -47,7 +51,7 @@
 .input__label-in-form {
   position: relative;
   display: block;
-  padding: 1em 0;
+  /*padding: 1em 0;*/
   width: 100%;
 }
 
@@ -122,6 +126,46 @@
 	animation: anim-1 0.3s forwards;
 }
 
+section.time-card-etc-commentbox {
+  width: 100%;
+    padding-right: 26px;
+    margin-top: 4px;
+    /*border-top: 1px solid #efefef;*/
+    color: #999;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    font-size: 14px;
+    line-height: 18px;
+    min-height: 56px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    /*padding: 16px 0;*/
+}
+
+textarea.time-card-textarea {
+    background: 0 0;
+    border: none;
+    color: #989898;
+    font-size: inherit;
+    height: 18px;
+    /*max-height: 80px;*/
+    outline: none;
+    padding: 0;
+    resize: none;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    min-height: 80px;
+}
+
 
 @-webkit-keyframes anim-1 {
 	50% {
@@ -157,6 +201,10 @@
 		-webkit-transform: translate3d(0, -40%, 0);
 		transform: translate3d(0, -40%, 0);
 	}
+}
+
+.input--minoru {
+  overflow: hidden;
 }
 
 .input__field--minoru {
@@ -234,7 +282,15 @@ textarea {
   position: absolute;
 }
 
-#dropzone {
-    margin: 0rem 3rem 3rem 0rem;
-    padding-top: 2em;
+@media only screen and (max-device-width : 480px){
+/* スマートフォンだけ以下を適用 */
+
+.form-title {
+ 		  font-size: 15px;
+  	}
+.input__label {
+      font-size: 15px;
+    }
+
+
 }

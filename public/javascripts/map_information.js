@@ -26,6 +26,7 @@ function initMap(){
   var mapOptions = {
     center: myLatlng,
     zoom: 5,
+    scrollwheel: false,
     styles: [
 
               {elementType: 'geometry', stylers: [{color: '#d3d6dd'}]},
@@ -251,15 +252,47 @@ function initMap(){
   // Map
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+
+    //var contentString =
+
+    /*'<ul>'+
+        '<li><%= result.title %><br/><img src="/uploads/<%= result.file %>" width="300"></li>'+
+    '</ul>';*/
+
+	/*'<!-- <div id="modal-overlay"></div> -->'+
+	'<div class="ex_2">'+
+	'<!-- モーダルウインドウ -->'+
+	'<div id="modal-content">'+
+	'<form id="detail">'+
+	'<p id="username">UserName</p>'+
+	'<hr>'+
+	'<p id="comment">Comment</p>'+
+	'<hr>'+
+	'<p>Like　Comment</p>'+
+	'<hr>'+
+	'</form>'+
+	'<img src="picture/Paris.JPG">'+
+	'<p>'+
+	'<a id="modal-close" class="button-link">'+
+	'<p id="close">閉じる</p>'+
+	'</a>'+
+	'</p>'+
+	'<!-- モーダルウィンドウのコンテンツの終了 -->'+
+	'</div>'+
+	'<p>'+
+	'<a id="modal-open" class="button-link"></a>'+
+	'</p>'+
+	'<!-- ここまでモーダルウィンドウ -->'+
+	'</div>';*/
+
   var infowindow;
 
   var showInfoWindow = function(markerObj) {
     if(infowindow) {
       infowindow.close();
     }
-    else if( $( "#modal-overlay")[0]) {
-      $("#modal-overlay").remove();
-    }
+
+    if( $( "modal-overlay")[0]) return false;
     //marker Object から titleとcontentを取得して表示させる
     var contents = '<strong>' + markerObj.getTitle() + '</strong><br />'
       + '<img src="/uploads/' + markerObj.file + '" width="300">' + '<br />'
@@ -280,67 +313,140 @@ function initMap(){
 
                      '</div>';
 
-    $("#map").append(contents02);
-    $("#map").append('<div id="modal-overlay"></div>');
-    $("#modal-overlay").fadeIn("slow");
+    $("body").append(contents02);
+    $("body").append('<div id="modal-overlay"></div>');
+    $("modal-overlay").fadeIn("slow");
 
-    centeringModalSyncer();
+    /*centeringModalSyncer();*/
 
     $("#modal-content").fadeIn("slow");
 
-    $("#modal-overlay,#modal-close").unbind().click( function() {
+    $("modal-overlay,#modal-close").unbind().click( function() {
 
       $("#modal-content,#modal-overlay").fadeOut("slow", function(){
 
-        $("#modal-overlay,#modal-content").remove();
+        $('#modal-overlay').remove();
       });
     });
 
+    /*infowindow = new google.maps.InfoWindow({
+      content: contents02
+    });*/
+    return infowindow.open(map, markerObj);
   };
 
-  $( window ).resize( centeringModalSyncer ) ;
 
-  //センタリングを実行する関数
-  function centeringModalSyncer() {
 
-    //画面(ウィンドウ)の幅、高さを取得
-    var w = $( window ).width() ;
-    var h = $( window ).height() ;
+  //var infowindow = new google.maps.InfoWindow({
 
-    var cw = $( "#modal-content" ).outerWidth();
-    var ch = $( "#modal-content" ).outerHeight();
+      /*<ul>
+        <% for item in @messages : %>
+          <li><%= item.title %><br/><img src="/uploads/<%= item.file %>" width="300"></li>
+        <% end %>
+      </ul>*/
 
-    //センタリングを実行する
-    $( "#modal-content" ).css( {"left": ((w - cw)/2) + "px","top": ((h - ch)/2) + "px"} ) ;
+	//content: contentString
+  //maxWidth: 200
 
-  }
+  //'<div class="ex_2" style="left: 275.5px; top: 133.5px;">'+
+  /* モーダルウインドウ */
+    /*'<div id="modal-content">'+
 
-  /*var showTab = function(markerObj) {
+      '<form id="detail">'+
+        '<p id="username">UserName</p>'+
+        '<hr>'+
+        '<p id="comment">Comment</p>'+
+        '<hr>'+
+        '<p>Like　Comment</p>'+
+        '<hr>'+
+      '</form>'+
 
-    var tabheader = '<a href="#tabpage1" style="z-index:0">' + markerObj.tag + '</a>'
+      '<img src="picture/Paris.JPG">'+
 
-    $("#tabcontrol").append(tabheader);
-  }*/
+      '<p>'+
+      '<a id="modal-close" class="button-link">'+
+      '<p id="close">閉じる</p>'+
+      '</a>'+
+      '</p>'+*/
 
-  for(var i=0, l=myMarkers.length; i<l; i+=1) {
+      /* モーダルウィンドウのコンテンツの終了 --> */
+      /*'</div>'+
+
+      '<p>'+
+      '<a id="modal-open" class="button-link">クリックするとモーダルウィンドウが開きます。</a>'+
+      '</p>'+*/
+      /* ここまでモーダルウィンドウ */
+      //'</div>'
+
+
+    //});
+    /*var mapLatLng = new google.maps.LatLng({lat: markerData[0]['lat'], lng: markerData[0]['lng']});*/
+
+    for(var i=0, l=myMarkers.length; i<l; i+=1) {
       var markerData = myMarkers[i],
-      marker = new google.maps.Marker({
+      marker = new mapIcons.Marker({
         position: new google.maps.LatLng( markerData.position[0], markerData.position[1] ),
         usename: markerData.username,
         title: markerData.title,
         comments: markerData.comment,
         file: markerData.file,
-        tag: markerData.tag,
-        map: map
+        map: map,
+        icon: {
+        		path: mapIcons.shapes.MAP_PIN,
+        		fillColor: '#0b8793',
+        		fillOpacity: 0.8,
+        		strokeColor: '',
+        		strokeWeight: 0
+        	},
+        map_icon_label: '<span class="map-icon map-icon-restaurant"></span>'
       });
 
-    google.maps.event.addListener(marker, 'click', function() {
+
+    google.maps.event.addListener(marker, 'click', function(markerObj) {
       $(this).blur();  //ボタンをフォーカスから離す
       showInfoWindow(this);
+
+      /*if( $( "modal-overlay")[0]) return false;
+
+      var contents02 = '<div id="modal-content" style="left: 427px; top: -3.5px; display: block;">' +
+                          '<form id="detail">' +
+                          '<p id="username">' + markerObj.usename + '</p>' + '<hr>' +
+                          '<p id="comment">' + markerObj.comments + '</p>' + '<hr>' +
+                          '</form>' +
+                        '<img id=uploadimg src="uploads/' + markerObj.file + '">' +
+
+                        '<p>' +
+                          '<a id="modal-close" class="button-link">' +
+                            '<p id="close">' + '閉じる' + '</p>' +
+                          '</a>' +
+                        '</p>' +
+
+                       '</div>';
+
+      //オーバーレイの出現
+      $("body").append(contents02);
+      $("body").append('<div id="modal-overlay"></div>');
+      $("modal-overlay").fadeIn("slow");
+
+      centeringModalSyncer();
+
+      $("#modal-content").fadeIn("slow");
+
+      $("modal-overlay,#modal-close").unbind().click( function() {
+
+        $("#modal-content,#modal-overlay").fadeOut("slow", function(){
+
+          $('#modal-overlay').remove();
+        });
+      });*/
+
     });
 
-  }
+    /*marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });*/
 
+  }
 
  }
 

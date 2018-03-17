@@ -1,0 +1,284 @@
+/* ホーム画面のヘッダー */
+
+/* パソコンで見たときは"pc"のclassがついた画像が表示される */
+.pc { display: block !important; }
+.sp { display: none !important; }
+
+header._mainc {
+  display: flex; /* 要素を横並びにする */
+  margin-bottom: 44px;
+}
+
+div.pro {
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+}
+
+.pro-pic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img.avatar-image {
+    background-color: #fafafa;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+div.pro-det-t, .pro-det-m {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.pro-det {
+  color: #262626;
+  -webkit-flex-shrink: 1;
+  -ms-flex-negative: 1;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+div.pro-det-t {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+h1.account-h {
+  margin: 0px;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 200;
+}
+
+h1.account-n {
+  font-size: 16px;
+}
+
+.pro-cha {
+  margin-left: 20px;
+}
+
+.pro-cha .btn2 {
+  line-height: 26px;
+  font-size: 14px;
+  margin: 0;
+}
+
+.pro-cha02 {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  height: 0;
+  margin-left: 5px;
+  margin-right: -10px;
+}
+
+.pro--cha02 {
+  margin-left: 2px;
+  margin-top: -12px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  background-image: url(https://goo.gl/NLUdLH);
+  background-position: -79px -390px;
+  /*background-repeat: no-repeat;
+  background-position: -287px -414px;*/
+  height: 24px;
+  width: 24px;
+  display: block;
+  overflow: hidden;
+  text-indent: 110%;
+  white-space: nowrap;
+}
+
+.post-n {
+  font-size: 16px;
+  margin-right: 40px;
+}
+
+.follow-link-m, .follower-link-m {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.content-mid {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: #999;
+  border-top: 1px solid #efefef;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  font-size: 12px;
+  font-weight: 600;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.m-card {
+  color: #262626;
+  -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    height: 52px;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+@media (max-width: 735px) {
+
+  /* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
+  .pc { display: none !important; }
+  .sp { display: block !important; }
+
+  header._sp {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 30px;
+    margin-bottom: 24px;
+  }
+
+  div.pro {
+    margin-right: 28px;
+  }
+
+  .pro-pic {
+    height: 77px;
+    width: 77px;
+  }
+
+  div.pro-det-t {
+    margin-bottom: 12px;
+  }
+
+  .pro-cha {
+    margin: 0;
+  }
+
+  button.btn2 {
+    margin: 0;
+    padding: 2px 50px;
+    color: #262626;
+  }
+
+  .pro-det-b {
+    border-bottom: 1px solid #efefef;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    padding: 0 16px 21px;
+    text-overflow: ellipsis;
+  }
+
+  h1.account-n {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  h1.account-h {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .pro-det-m {
+    margin-bottom: 12px;
+    justify-content: space-around;
+  }
+
+  .post-n {
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    width: 33.3%;
+    margin: 0px;
+  }
+
+  .post-n-sp, .follow-link-m, .follower-link-m {
+    text-align: center;
+    color: #999;
+  }
+
+  .post--n, .follow-link-n, .follower-link-n {
+    display: block;
+    color: #262626;
+    font-weight: 600;
+  }
+}
+
+@media (min-width: 736px) {
+  div.pro {
+    margin-right: 30px; /* プロフィール画像の位置の調整 */
+    flex-basis: 0;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+  }
+  .pro-pic {
+    height: 152px;
+    width: 152px;
+  }
+  .pro-det{
+    -webkit-flex-basis: 30px;
+    -ms-flex-preferred-size: 30px;
+    flex-basis: 30px;
+    -webkit-box-flex: 2;
+    -webkit-flex-grow: 2;
+    -ms-flex-positive: 2;
+    flex-grow: 2;
+  }
+
+  .m-card:not(:last-child) {
+    margin-right: 60px;
+  }
+
+  .m-card-post {
+    border-top: 1px solid #262626;
+    color: #262626;
+    margin-top: -1px;
+  }
+}

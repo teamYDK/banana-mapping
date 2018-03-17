@@ -33,6 +33,58 @@ router.get('/', function(req, res, next) {//文字の表示
   });
 });
 
+// ホーム画面
+router.get('/home', function(req, res, next) {//文字の表示
+  var query = firebase.database().ref('messages').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      messages.push(childSnapshot.val());
+    });
+    res.render('home', { title: 'My Mapping', messages: messages });
+  });
+});
+
+// タグ別の地図
+router.get('/tagged', function(req, res, next) {//文字の表示
+  var query = firebase.database().ref('messages').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      messages.push(childSnapshot.val());
+    });
+    res.render('taggedmap', { title: 'My Mapping', messages: messages });
+  });
+});
+
+// タイムライン
+router.get('/dashbord', function(req, res, next) {//文字の表示
+  var query = firebase.database().ref('messages').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      messages.push(childSnapshot.val());
+    });
+    res.render('timeline', { title: 'My Mapping', messages: messages });
+  });
+});
+
+//　ログイン画面
+router.get('/login', function(req, res, next) {//文字の表示
+  var query = firebase.database().ref('messages').orderByKey();
+  query.once('value').then(function(snapshot) {
+    console.log(snapshot.exportVal());
+    var messages = [];
+    snapshot.forEach(function(childSnapshot) {
+      messages.push(childSnapshot.val());
+    });
+    res.render('loginform', { title: 'My Mapping', messages: messages });
+  });
+});
+
 router.get('/multi-map', function(req, res, next) {//文字の表示
   var query = firebase.database().ref('messages').orderByKey();
   query.once('value').then(function(snapshot) {
@@ -45,7 +97,7 @@ router.get('/multi-map', function(req, res, next) {//文字の表示
   });
 });
 
-router.get('/login', function(req, res, next) {//文字の表示
+router.get('/loginx', function(req, res, next) {//文字の表示
   var query = firebase.database().ref('messages').orderByKey();
   query.once('value').then(function(snapshot) {
     console.log(snapshot.exportVal());
