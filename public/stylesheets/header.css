@@ -1,4 +1,9 @@
 /* header *//* header */
+
+/* パソコンで見たときは"pc"のclassがついた画像が表示される */
+.pc { display: block !important; }
+.sp { display: none !important; }
+
 #top-head {
     position: fixed;
     width: 100%;
@@ -225,6 +230,42 @@
   white-space: nowrap;
 }
 
+@media (max-width: 735px) {
+
+  /* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
+  .pc { display: none !important; }
+  .sp { display: block !important; }
+
+  #top-head {
+    padding-top: 5px;
+  }
+
+  #top-head:after {
+    margin-top: 15px;
+  }
+
+  .mobile-logo {
+    position: absolute;
+    left: 30%;
+  }
+
+  .logo-link {
+    position: absolute;
+    height: 40px;
+  }
+
+  #top-head .name-logo {
+    position: relative;
+    top: 0px;
+    left: 0;
+  }
+
+  .header--nav {
+    padding-top: 5px;
+  }
+
+}
+
 @media only screen and (max-device-width : 480px){
 /* スマートフォンだけ以下を適用 */
 
@@ -237,7 +278,7 @@
   }
 
   #top-head #svg {
-    height: 50px;
+    height: 40px;
     /*width: 60px;
     height: 60px;*/
   }

@@ -1,9 +1,5 @@
 /* ホーム画面のヘッダー */
 
-/* パソコンで見たときは"pc"のclassがついた画像が表示される */
-.pc { display: block !important; }
-.sp { display: none !important; }
-
 header._mainc {
   display: flex; /* 要素を横並びにする */
   margin-bottom: 44px;
@@ -171,10 +167,6 @@ h1.account-n {
 }
 
 @media (max-width: 735px) {
-
-  /* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
-  .pc { display: none !important; }
-  .sp { display: block !important; }
 
   header._sp {
     margin-left: 16px;

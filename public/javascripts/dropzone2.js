@@ -17,15 +17,16 @@ $(function() {
   $('#dropzone input').on('change', function(e) {
     var file = this.files[0];
 
-    $('#dropzone').addClass('dropped');
-    $('#dropzone').removeClass('hover');
-
     if (this.accept && $.inArray(file.type, this.accept.split(/, ?/)) == -1) {
       return alert('File type not allowed.');
     }
 
-    $('.progress').toggleClass('complete');
-    $('#dropzone img').remove();
+    if(!navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
+      $('#dropzone').addClass('dropped');
+      $('#dropzone').removeClass('hover');
+      $('.progress').toggleClass('complete');
+      $('#dropzone img').remove();
+    }
 
     if ((/^image\/(gif|png|jpeg)$/i).test(file.type)) {
 
@@ -58,29 +59,54 @@ $(function() {
           var width = this.width;
           var height = this.height;
           var viewheight = 540 * height / width;
-          $('#image-placehold').append($img);
-          $('#image-placed').append('<p>' + 'Width : ' + width + '　Height : ' + height + '</p>');
-          $('#image-placed').append('<p>' + 'FileName : ' + fname + '　FileSize : ' + fsize + 'bytes</p>');
-          $('#image-placehold').css({
-            'width' : '540px',
-            'height' : viewheight
-          });
-          $('.drop-det').css({
-            'width' : '540px',
-            'height' : viewheight
-          });
-          $('#dropzone').css({'height' : viewheight});
+          var viewheightsm = 365 * height / width;
+
+            if(!navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
+              $('#pc #image-placehold').append($img);
+              $('#pc #image-placed').append('<p>' + 'Width : ' + width + '　Height : ' + height + '</p>');
+              $('#pc #image-placed').append('<p>' + 'FileName : ' + fname + '　FileSize : ' + fsize + 'bytes</p>');
+              $('#pc #image-placehold').css({
+                'width' : '540px',
+                'height' : viewheight
+              });
+              $('#pc .drop-det').css({
+                'width' : '540px',
+                'height' : viewheight
+              });
+              $('#pc #dropzone').css({
+                'width' : '540px',
+                'height' : viewheight
+              });
+            }
+            if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
+              $('#sm #image-placehold').append($img);
+              $('#sm #image-placed').append('<p>' + 'Width : ' + width + '　Height : ' + height + '</p>');
+              $('#sm #image-placed').append('<p>' + 'FileName : ' + fname + '　FileSize : ' + fsize + 'bytes</p>');
+              $('#sm #image-placehold').css({
+                'width' : '375px',
+                'height' : '375px'
+              });
+              $('#sm .drop-det').css({
+                'width' : '375px',
+                'height' : '375px'
+              });
+              $('#sm #dropzone').css({
+                'width' : '100%',
+                'height' : '375px',
+                'margin' : '0px'
+              });
+            }
         };
-
-        $('#image-placed').delay(600).animate({opacity:1}, 1000);
-        //$('#dropzone .image-placed').append($img);
-        $('.add').show();
-        $('.input-username').show();
-        $('.input-title').show();
-        $('.time-card-etc-commentbox').show();
-        $('.input-tag').show();
-        $('.button').show();
-
+        if(!navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
+          $('#pc #image-placed').delay(600).animate({opacity:1}, 1000);
+          $('#pc .add').show();
+          $('#pc .other-formdet').show();
+        };
+        if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
+          $('#sm #image-placed').delay(600).animate({opacity:1}, 1000);
+          $('#sm .add').show();
+          $('#sm .other-formdet').show();
+        }
 
       };
     } else {

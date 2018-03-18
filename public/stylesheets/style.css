@@ -33,6 +33,10 @@ body {
     /*background: #fafafa;*/
 }
 
+/* パソコンで見たときは"pc"のclassがついた画像が表示される */
+.pc { display: block !important; }
+.sp { display: none !important; }
+
 article.content {
     /*min-height: 100vh;*/
     -webkit-box-flex: 1;
@@ -133,8 +137,19 @@ body {
  		  font-size: 10px;
   	}
 .content-body {
-        padding: 78px 5px 0px 5px;
+        padding: 45px 5px 0px 5px;
       }
+.inner {
+  padding: 0 10px;
+}
+
+}
+
+@media (max-width: 735px) {
+
+  /* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
+  .pc { display: none !important; }
+  .sp { display: block !important; }
 
 }
 

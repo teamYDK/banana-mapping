@@ -54,7 +54,7 @@ div.time-cards {
   flex-shrink: 0;
   margin: 0;
   position: relative;
-  border-bottom: 1px solid #e6e6e6;
+  /*border-bottom: 1px solid #e6e6e6;*/
   height: 60px;
   padding: 16px;
   -webkit-box-align: center;
@@ -135,7 +135,8 @@ div.time-cards {
 }
 
 #timeline a.time-card-pro--name /* , .time-card-pro--name:visited */ {
-  color: #262626;
+  /*color: #262626;*/
+  color: #444;
   -webkit-box-flex: 0;
   -webkit-flex-grow: 0;
   -ms-flex-positive: 0;
@@ -162,7 +163,9 @@ div.time-cards {
 }
 
 #timeline a.time-card--place {
-  color: #262626;
+  color: #8f8f8f;
+  font-weight: normal;
+  /*color: #262626;*/
   max-width: 100%;
   line-height: 15px;
   font-size: 12px;
@@ -213,6 +216,11 @@ div.time-cards {
   left: 0;
   position: absolute;
   top: 0;
+  /*background-image: url(https://i0.wp.com/lh3.googleusercontent.com/-LXoFs8iibmI/WnsGvpfv3OI/AAAAAAAAUSs/BJuC9KfnZdkvaeB9Q_2NYt3_Fa7fvq0nACCoYBhgL/w700-o/IMG_9576.jpg?ssl=1);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;*/
+  box-sizing: border-box;
+  object-fit: cover;
 }
 
 #timeline div.time-card-pic--img {
@@ -339,6 +347,8 @@ div.time-cards {
   -ms-flex-negative: 1;
   flex-shrink: 1;
   display: block;
+  font-weight: normal;
+  color: #8f8f8f;
 }
 
 #timeline a.act-name {
@@ -366,6 +376,8 @@ div.time-cards {
   padding-top: 5px;
   overflow-anchor: none;
   -webkit-overflow-scrolling: touch;
+  color: #444;
+  font-weight: normal;
 }
 
 #timeline ul.time-card-etc--comment {
@@ -410,10 +422,10 @@ div.time-cards {
   color: #999;
   margin-bottom: 5px;
   text-transform: uppercase;
-
+  font-weight: normal;
 }
 
-#timeline time.time-card-post-time {
+#timeline div.time-card-post-time {
   font-size: 10px;
   letter-spacing: .2px;
 }
@@ -524,8 +536,31 @@ div.time-cards {
 }
 
 @media (min-width: 736px) {
-  #timeline time.time-ps {
+  #timeline div.time-ps {
     font-size: 15px;
     line-height: 18px;
+  }
+}
+
+@media (max-width: 735px) {
+  .tlpc {
+    padding: 45px 0 0;
+  }
+  div.time-cards {
+    font-size: 15px;
+  }
+  #timeline article.time-card {
+    margin-bottom: 20px;
+    border-radius: 3px;
+    background-color: #fff;
+    margin-left: -1px;
+    margin-right: -1px;
+    padding: 0;
+  }
+  #timeline a.time-card-pro--name{
+    font-size: 15px;
+  }
+  #timeline div.time-card-post-time {
+    font-size: 15px;
   }
 }

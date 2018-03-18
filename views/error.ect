@@ -1,4 +1,8 @@
-<% extend 'layout3' %>
-<h1><%= @message %></h1>
-<h2><%= @error.status %></h2>
-<pre><%= @error.stack %></pre>
+<% extend 'layout-error' %>
+
+<div class='error-banner'>
+  <h1><%= @message %></h1>
+  <h2><%= @error.status %></h2>
+  <div class='error-404'></div>
+  <pre><%= @error.stack %></pre>
+</div>
