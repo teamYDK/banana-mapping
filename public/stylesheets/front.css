@@ -40,7 +40,7 @@ body {
   top: 50%;
 }
 #header .center .middle h1 {
-  font-family: "Lusitana";
+  /*font-family: "Lusitana";*/
   font-weight: normal;
   line-height: 1em;
   font-size: 11em;
@@ -164,5 +164,26 @@ body {
   }
   100% {
     opacity: 0;
+  }
+}
+
+@media (max-width: 735px) {
+  #header {
+    height: 40%;
+    margin-top: 45px;
+    z-index: 0;
+  }
+  #header .center .middle h1 {
+    font-size: 30px;
+  }
+  #header .center .middle span {
+    line-height: 4em;
+    font-size: 15px;
+  }
+  #page {
+    top: 40%;
+  }
+  #page a {
+    padding: 0;
   }
 }
