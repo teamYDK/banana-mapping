@@ -275,8 +275,90 @@
 
       <div class="content-body tlpc">
 
+        <script>
+
+        var timeline_time = [
+          <% for item in @messages : %>
+          '<%= item.time %>',
+          <% end : %>
+        ];
+
+        </script>
 
        <article class="content">
+
+         <% for item in @messages : %>
+
+         <div id="timeline" class="time-cards">
+           <div>
+             <div class="time--cards">
+               <article class="time-card">
+                 <header class="time-card-pro">
+                   <div class="time-card-pro-pic">
+                     <a><img class="time-card-avatar-image" src="https://i1.wp.com/lh3.googleusercontent.com/-qESBiRVtlAs/WSAZpULwV5I/AAAAAAAAQXA/4OUueFUhCnMrgWGuP4D5VLY6cjb_9-V4wCCo/w700-o/IMG_3584.jpg?ssl=1"></a>
+                   </div>
+                   <div class="time-card-pro-det">
+                     <div class="">
+                       <div class="time-card-pro-name"><a class="time-card-pro--name"><%= item.username %></a></div>
+                     </div>
+                     <div class="time-card-place"><a class="time-card--place"><%=item.place %>, <%=item.location %></a></div>
+                   </div>
+                  </header>
+                 <div class="time-card-photo"></div>
+                 <div class="time-card-pic">
+                    <div>
+                      <div class="time-card--pic">
+                        <div>
+                          <div class="time-card-pic-cont">
+                            <div class="time-card-pic--cont">
+                              <div class="time-card-pic-img"><img class="time-card-pic-rimg" src="<%= item.file %>"></div>
+                              <div class="time-card-pic--img"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="time-card-pic-row"><table class="time-card-pic--row"></table></div>
+                      </div>
+                    </div>
+                  </div>
+                 <div class="time-card-etc">
+                   <section class="time-card-etc-mark">
+                     <a class="mark-like" href="#" role="button" aria-disabled="false"><span class="card-heart-button">ハート</span></a>
+                     <a class="mark-comment" href="#" role="button"><span class="card-comment-button">コメント</span></a>
+                     <a class="mark-save" href="#" role="button" aria-disabled="false"><span class="card-save-button">保存</span></a>
+                   </section>
+                   <section class="time-card-etc-act">
+                     <div class="time-card-etc--act pc"><a class="act-name">mana_manami</a>さんが「いいね！」しました</div>
+                     <div class="time-card-etc--act sp">いいね！<span>2</span>件</div>
+                   </section>
+                   <div class="time-card-etc-comment">
+                     <ul class="time-card-etc--comment">
+                       <li class="time-card-etc---comment">
+                         <a class="time-card-post-name"><%= item.username %></a>
+                         <span>
+                           <span><span><%= item.comment %></span></span>
+                         </span>
+                       </li>
+                     </ul>
+                   </div>
+                   <div class="time-card-etc-time">
+                     <a class="time-card-etc--time"><div class="time-card-post-time time-ps">#<%= item.tag %></div></a>
+                   </div>
+                   <section class="time-card-etc-commentbox">
+                     <form class="time-card-etc--commentbox">
+                       <textarea aria-label="コメントを追加..." class="time-card-textarea" placeholder="コメントを追加..."></textarea>
+                     </form>
+                   </section>
+                 </div>
+                 <div class="time-card-detail">
+                   <button class="time-card-detail-button">
+                     <span class="time-card-detail--button">詳細</span>
+                   </button>
+                 </div>
+               </article>
+             </div>
+           </div>
+         </div>
+         <% end %>
 
          <div id="timeline" class="time-cards">
            <div>
