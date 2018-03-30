@@ -1,7 +1,4 @@
 $(function() {
-  $('head').append(
-    '<style>.hi-icon{display:none; margin-top:30px;} .hi-icon2{display: none;}'
-  );
   $(window).load(function() {
     $('.hi-icon, .hi-icon2').delay(4000).fadeIn("slow");
 

@@ -174,6 +174,19 @@ div.time-cards {
   white-space: nowrap;
 }
 
+#timeline a.time-card--place .postal-code{
+  display: none;
+}
+
+#timeline a.time-card--place .extended-address{
+  display: none;
+}
+
+#timeline a.time-card--place .street-address{
+  display: none;
+}
+
+
 #timeline div.time-card--pic {
   left: 0;
   position: relative;
@@ -269,10 +282,11 @@ div.time-cards {
   border: none;
   cursor: pointer;
   padding: 8px;
+  width: 40px;
+  height: 40px;
 }
 
-#timeline span.card-heart-button {
-  /*background-position: -465px -182px;*/
+/*#timeline span.card-heart-button {
   height: 24px;
   width: 24px;
   background-image: url(https://goo.gl/NLUdLH);
@@ -282,7 +296,7 @@ div.time-cards {
   overflow: hidden;
   text-indent: 110%;
   white-space: nowrap;
-}
+}*/
 
 #timeline a.mark-comment {
   display: inline-block;
@@ -295,8 +309,7 @@ div.time-cards {
 #timeline span.card-comment-button {
   height: 24px;
   width: 24px;
-  background-image: url(https://goo.gl/NLUdLH);
-  background-position: -408px -26px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' aria-labelledby='title' aria-describedby='desc' role='img' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3EBubble%3C/title%3E%3Cdesc%3EA line styled icon from Orion Icon Library.%3C/desc%3E%3Cpath data-name='layer1' d='M5 59l18.8-6.9a37.1 37.1 0 0 0 8.2.9c16.6 0 30-10.7 30-24S48.6 5 32 5 2 15.7 2 29c0 6.7 3.5 12.8 9.1 17.2z' fill='%23d5d4d4' stroke='%23d5d4d4' stroke-miterlimit='10' stroke-width='4' stroke-linejoin='round' stroke-linecap='round'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   display: block;
   overflow: hidden;
@@ -446,6 +459,21 @@ div.time-cards {
   -ms-flex-pack: center;
   justify-content: center;
   padding: 16px 0;
+  display: none;
+}
+
+#timeline section.show {
+  display: block;
+  animation: show 0.5s linear 0s;
+}
+
+@keyframes show{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 #timeline form.time-card-etc--commentbox {
@@ -521,6 +549,240 @@ div.time-cards {
   overflow: hidden;
   text-indent: 110%;
   white-space: nowrap;
+}
+
+/*.heart {
+  position: relative;
+  --size: 2vh;
+  width: var(--size);
+  height: var(--size);
+}
+.heart__checkbox {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: absolute;
+  top: calc(var(--size) * -.4);
+  left: calc(var(--size) * -.2);
+  width: calc(var(--size) * 1.5);
+  height: calc(var(--size) * 1.5);
+  z-index: 2;
+  cursor: pointer;
+  -webkit-transform: scale(1) rotate(45deg);
+          transform: scale(1) rotate(45deg);
+}
+.heart__checkbox:focus {
+  outline: none;
+}
+.heart__checkbox:hover ~ .heart__icon {
+  -webkit-transform: scale(1.1) rotate(45deg);
+          transform: scale(1.1) rotate(45deg);
+}
+.heart__checkbox:checked ~ .heart__icon {
+  -webkit-animation: heartAnimation forwards 1s;
+          animation: heartAnimation forwards 1s;
+}
+.heart__icon {
+  width: var(--size);
+  height: var(--size);
+  background: #D5D4D4;
+  -webkit-transform: scale(1) rotate(45deg);
+          transform: scale(1) rotate(45deg);
+  position: absolute;
+  top: 7px;
+  left: 5px;
+  -webkit-transition: -webkit-transform 200ms ease-out;
+  transition: -webkit-transform 200ms ease-out;
+  transition: transform 200ms ease-out;
+  transition: transform 200ms ease-out, -webkit-transform 200ms ease-out;
+}
+.heart__icon::before, .heart__icon::after {
+  content: '';
+  display: block;
+  background: inherit;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  position: absolute;
+}
+.heart__icon::before {
+  top: 0;
+  left: -50%;
+}
+.heart__icon::after {
+  left: 0;
+  top: -50%;
+}
+
+@-webkit-keyframes heartAnimation {
+  0% {
+    -webkit-transform: scale(1.1) rotate(45deg);
+            transform: scale(1.1) rotate(45deg);
+  }
+  25% {
+    -webkit-transform: scale(0.7) rotate(45deg);
+            transform: scale(0.7) rotate(45deg);
+  }
+  45% {
+    -webkit-transform: scale(1.4) rotate(45deg);
+            transform: scale(1.4) rotate(45deg);
+    background: red;
+  }
+  70% {
+    -webkit-transform: scale(1) rotate(45deg);
+            transform: scale(1) rotate(45deg);
+    background: red;
+  }
+  100% {
+    -webkit-transform: scale(1.1) rotate(45deg);
+            transform: scale(1.1) rotate(45deg);
+    background: red;
+  }
+}
+
+@keyframes heartAnimation {
+  0% {
+    -webkit-transform: scale(1.1) rotate(45deg);
+            transform: scale(1.1) rotate(45deg);
+  }
+  25% {
+    -webkit-transform: scale(0.7) rotate(45deg);
+            transform: scale(0.7) rotate(45deg);
+  }
+  45% {
+    -webkit-transform: scale(1.4) rotate(45deg);
+            transform: scale(1.4) rotate(45deg);
+    background: red;
+  }
+  70% {
+    -webkit-transform: scale(1) rotate(45deg);
+            transform: scale(1) rotate(45deg);
+    background: red;
+  }
+  100% {
+    -webkit-transform: scale(1.1) rotate(45deg);
+            transform: scale(1.1) rotate(45deg);
+    background: red;
+  }
+}*/
+
+
+#timeline .action {
+    height: 18vh;
+    width: 18vh;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+}
+#timeline .love {
+  width: 25px;
+  height: 25px;
+}
+#timeline .line {
+  margin: 2vh;
+  position: absolute;
+  top: -2px;
+  left: -1px;
+}
+#timeline .line:nth-of-type(1) {
+  transform: rotate(0deg);
+}
+#timeline .line:nth-of-type(2) {
+  transform: rotate(45deg);
+}
+#timelin .line:nth-of-type(3) {
+  transform: rotate(90deg);
+}
+#timeline .line:nth-of-type(4) {
+  transform: rotate(135deg);
+}
+#timeline .line:nth-of-type(5) {
+  transform: rotate(180deg);
+}
+#timeline .line:nth-of-type(6) {
+  transform: rotate(225deg);
+}
+#timeline .line:nth-of-type(7) {
+  transform: rotate(270deg);
+}
+#timeline .line:nth-of-type(8) {
+  transform: rotate(315deg);
+}
+#timeline .line.active:before {
+  content: '';
+  height: 9vh;
+  width: 0.4vh;
+  background: red;
+  position: absolute;
+  top: -4.5vh;
+  left: -0.18vh;
+  will-change: top, height;
+  animation: line1 .3s ease-out 1;
+}
+#timeline .heart {
+  background-color: #D5D4D4;
+  width: 2vh;
+  height: 2vh;
+  margin: auto;
+  position: absolute;
+  top: 5px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: rotate(-45deg);
+}
+#timeline .heart:before, #timeline .heart:after {
+  content: '';
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  background-color: #D5D4D4;
+  position: absolute;
+}
+#timeline .heart:before {
+  top: -1vh;
+  left: 0;
+}
+#timeline .heart:after {
+  top: 0;
+  left: 1vh;
+}
+#timeline .heart.love {
+  background: #F80808;
+}
+#timeline .heart.love:before, #timeline .heart.love:after {
+  background: #F80808;
+}
+#timeline .heart.active {
+  animation: grow-shrink .3s ease 1;
+}
+
+@keyframes line1 {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    top: -4.5vh;
+  }
+  65% {
+    height: 2vh;
+  }
+  100% {
+    height: 0.36vh;
+    top: -5vh;
+  }
+}
+@keyframes grow-shrink {
+  40% {
+    transform: scale(1.1) rotate(-45deg);
+  }
+  75% {
+    transform: scale(0.9) rotate(-45deg);
+  }
+  100% {
+    transform: scale(1) rotate(-45deg);
+  }
 }
 
 @media (min-width: 640px) {

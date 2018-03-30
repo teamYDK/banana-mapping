@@ -6,7 +6,7 @@
 }
 
 .hi-icon, .hi-icon2 {
-    display: inline-block;
+    display: none;
     cursor: pointer;
     text-align: center;
     position: relative;

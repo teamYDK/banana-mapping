@@ -277,6 +277,7 @@
 
       <div class="content-body tmls">
 
+        <!-- PC -->
         <form method="post" enctype="multipart/form-data" action="/upload">
 
           <!-- PC送信フォーム -->
@@ -298,7 +299,7 @@
                           <div>
                             <p class="drop-mes"><!-- <i class="material-icons mipho">add_a_photo</i> --></br>画像をアップロード</br></p>
                           </div>
-                          <input class="area" id="drop-area" type="file" accept="image/png, application/pdf, image/jpeg" />
+                          <input class="area" id="drop-area image_file" name="picture" type="file" accept="image/png, application/pdf, image/jpeg" />
                           <div class="drop-box">
                             <div class="progress"></div>
                           </div>
@@ -351,15 +352,6 @@
                   <div id="result"></div>
 
                   <div style="display: none;"class="other-formdet">
-                      <!-- ユーザー名 -->
-                      <span class="input input--form input-username">
-                              <input class="input__field input__field--form" type="text" name="username" id="input-4">
-                              <label class="input__label input__label--form input__label--form-color-1" for="input-4">
-                                <span class="input__label-in-form input__label-in-form--form">
-                                  <i style="margin: 10px;" class="fa fa-user fa-large"></i>USERNAME
-                                </span>
-                              </label>
-                      </span>
 
                       <!-- 写真タイトル -->
                       <span class="input input--form input-title">
@@ -379,7 +371,7 @@
                       </section>
 
                       <!-- タグ -->
-                      <span style="display:none;" class="input input--form">
+                      <span style="" class="input input--form">
                                 <input class="input__field input__field--form" type="text" id="input-4" name="tag">
                                 <label class="input__label input__label--form input__label--form-color-1" for="input-4">
                                   <span class="input__label-in-form input__label-in-form--form">
@@ -389,7 +381,7 @@
                       </span>
 
                       <!-- チェックボックス -->
-                      <div style="display: none;" class="checkbox02">
+                      <div style="" class="checkbox02">
                         <% for item in @messages : %>
                           <label>
                             <input type="checkbox" name="checkbox01[]" value="<%= item.tag %>" class="checkbox01-input">
@@ -400,12 +392,12 @@
                       <!-- <div id="show1">まだチェックされてません</div> -->
 
                       <!-- タグ入力エリア -->
-                      <label class="input-tag" for="exist-values">
+                      <label style="display:none" class="input-tag" for="exist-values">
                         <input type="text" id="exist-values" class="tagged form-control" data-removeBtn="true" name="tag" value="" placeholder="#タグ">
                       </label>
 
-                      <script src="javascripts/tags.min.js"></script>
-                      <script src="javascripts/tag.js"></script>
+                      <!-- <script src="javascripts/tags.min.js"></script>
+                      <script src="javascripts/tag.js"></script> -->
                     </div>
 
                 </section>
@@ -419,6 +411,7 @@
 
         </form>
 
+        <!-- スマホ -->
         <form method="post" enctype="multipart/form-data" action="/upload">
           <!-- スマホ送信フォーム -->
           <div id="sm" class="sp">
@@ -433,9 +426,9 @@
 
                         <div id="dropzone">
                           <div>
-                            <p class="drop-mes"><!-- <i class="material-icons mipho">add_a_photo</i> --></br>画像を選んでください</br></p>
+                            <p class="drop-mes"></br>画像を選んでください</br></p>
                           </div>
-                          <input class="area" id="drop-area" type="file" accept="image/png, application/pdf, image/jpeg" />
+                          <input class="area" id="drop-area" type="file" name="picture" accept="image/png, application/pdf, image/jpeg" />
                           <div class="drop-det">
                             <div id="image-placed">
                               <div id="image-placehold"></div>
@@ -512,7 +505,7 @@
                       </section>
 
                       <!-- タグ -->
-                      <span style="display: none;"class="input input--form">
+                      <span class="input input--form">
                                 <input class="input__field input__field--form" type="text" id="input-4" name="tag">
                                 <label class="input__label input__label--form input__label--form-color-1" for="input-4">
                                   <span class="input__label-in-form input__label-in-form--form">
@@ -522,7 +515,7 @@
                       </span>
 
                       <!-- チェックボックス -->
-                      <div style="display: none;" class="checkbox02">
+                      <div class="checkbox02">
                         <% for item in @messages : %>
                           <label>
                             <input type="checkbox" name="checkbox01[]" value="<%= item.tag %>" class="checkbox01-input">
@@ -533,10 +526,9 @@
                       <!-- <div id="show1">まだチェックされてません</div> -->
 
                       <!-- タグ入力エリア -->
-                      <label class="input-tag" for="exist-values">
-                        <input type="text" id="exist-values" class="tagged form-control" data-removeBtn="true" name="tag" value="" placeholder="#タグ">
+                      <label style="display:none;" class="input-tag" for="exist-values">
+                        <input type="text" id="exist-values" class="taggedsp form-control" data-removeBtn="true" name="tag" value="" placeholder="#タグ" autofocus/>
                       </label>
-
                       <script src="javascripts/tags.min.js"></script>
                       <script src="javascripts/tag.js"></script>
                     </div>
@@ -553,6 +545,7 @@
 
         </br>
 
+        <!-- スマホのみに表示されるフッター -->
         <div id="tab-footer" class="sp">
           <nav class="tabfotter" role="navigation">
             <div class="tab-content">
@@ -602,4 +595,12 @@
         </ul> -->
 
       </div>
+
+      <script src="javascripts/map_geocode.js"></script>
+      <div id="map"></div>
+
     </div>
+
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtt5lsKj1OJBf3lAJTamkblXrMNLM7ay0&libraries=places&callback=initGeoComplete">
+    </script>

@@ -44,16 +44,14 @@ $(function() {
                 ? createObjectURL(file)
                 : e.target.result,
 
-          $img = $('<div>').attr({
-            'id' : 'effect'
+          $img = $('<img>').attr({
+            'id' : 'effect',
+            'src' : url
           }).css({
-            'background-image' : 'url(' + url + ')',
-            'background-position' : '50% 50%'
+            //'background-image' : 'url(' + url + ')',
+            //'background-position' : '50% 50%',
+            'object-fit' : 'cover'
           }).fadeIn();
-
-          /*$img = $('<img>').on('load error', function() {
-            $result.append(this);
-          }).attr('src', url);*/
 
         image.onload = function() {
           var width = this.width;
@@ -91,6 +89,7 @@ $(function() {
                 'height' : '375px'
               });
               $('#sm #dropzone').css({
+                'background' : 'transparent',
                 'width' : '100%',
                 'height' : '375px',
                 'margin' : '0px'
@@ -103,7 +102,7 @@ $(function() {
           $('#pc .other-formdet').show();
         };
         if(navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/)){
-          $('#sm #image-placed').delay(600).animate({opacity:1}, 1000);
+          $('#sm #image-placed').animate({opacity:1}, 1000);
           $('#sm .add').show();
           $('#sm .other-formdet').show();
         }

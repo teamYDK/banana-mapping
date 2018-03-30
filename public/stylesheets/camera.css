@@ -8,7 +8,6 @@ li {
   width: 500px;
   height: auto;
 }
-
 @media only screen and (max-device-width : 480px){
 /* スマートフォンだけ以下を適用 */
 

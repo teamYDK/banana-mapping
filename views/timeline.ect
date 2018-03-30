@@ -322,8 +322,16 @@
                   </div>
                  <div class="time-card-etc">
                    <section class="time-card-etc-mark">
-                     <a class="mark-like" href="#" role="button" aria-disabled="false"><span class="card-heart-button">ハート</span></a>
-                     <a class="mark-comment" href="#" role="button"><span class="card-comment-button">コメント</span></a>
+                     <a class="mark-like">
+                       <!-- <div class="heart">
+                          <input type="checkbox" class="heart__checkbox">
+                          <div class="heart__icon"></div>
+                       </div> -->
+                       <div class="love action">
+                         <span class="card-heart-button heart"></span>
+                       </div>
+                     </a>
+                     <a class="mark-comment" role="button"><span class="card-comment-button">コメント</span></a>
                      <a class="mark-save" href="#" role="button" aria-disabled="false"><span class="card-save-button">保存</span></a>
                    </section>
                    <section class="time-card-etc-act">
@@ -349,7 +357,7 @@
                      </form>
                    </section>
                  </div>
-                 <div class="time-card-detail">
+                 <div style="display: none;" class="time-card-detail">
                    <button class="time-card-detail-button">
                      <span class="time-card-detail--button">詳細</span>
                    </button>

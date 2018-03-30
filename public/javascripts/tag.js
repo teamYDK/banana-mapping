@@ -165,7 +165,7 @@
         var name = target.value.trim();
 
         // if(code === KEYS.ENTER || code === KEYS.COMMA) {
-        if(code === KEYS.ENTER) {
+        if(code === KEYS.COMMA) {
 
           target.blur();
 
@@ -245,8 +245,6 @@
 
     init();
 
-    /* Public API */
-
     this.getTags = function() {
       return tagsArray;
     }
@@ -296,32 +294,48 @@
 })();
 
 // Use
-var tags = new Tags('.tagged');
+var tags = new Tags('.taggedsp');
 
-document.getElementById('get').addEventListener('click', function(e) {
-  e.preventDefault();
-  alert(tags.getTags());
-});
-document.getElementById('clear').addEventListener('click', function(e) {
-  e.preventDefault();
-  tags.clearTags();
-});
-document.getElementById('add').addEventListener('click', function(e) {
-  e.preventDefault();
-  tags.addTags('New');
-});
-document.getElementById('addArr').addEventListener('click', function(e) {
-  e.preventDefault();
-  tags.addTags(['Steam Machines', 'Nintendo Wii U', 'Shield Portable']);
-});
-document.getElementById('destroy').addEventListener('click', function(e) {
-  e.preventDefault();
-  if(this.textContent === 'destroy') {
-    tags.destroy();
-    this.textContent = 'reinit';
-  } else {
-    this.textContent = 'destroy';
-    tags = new Tags('.tagged');
+
+/*$(document).ready(function(){
+  var $input = $("#app input"),
+      $appendHere = $(".tagHere"),
+      oldKey = 0, newKey,
+      TABKEY = 9;
+  $input.focus();
+
+  $input.keydown(function(e){
+
+    if(e.keyCode == TABKEY) {
+      if(e.preventDefault) {
+        e.preventDefault();
+        if($(this).val() == '' || $(this).val() == ' ') {
+          return false;
+        }
+        addTag($(this));
+      }
+      return false;
+    }
+
+    if($(this).val() == '' && e.keyCode === 8) {
+      $(".tag:last-child").remove();
+    }
+
+  })
+
+  function addTag(element) {
+    var $tag = $("<div />"), $span = $("<span />"), $button = $("<button />");
+    $tag.addClass('tag');
+    $span.addClass('tag__name');
+    $button.addClass('tag__remove');
+    $span.text($(element).val());
+    $a.bind('click', function(){
+      $(this).parent().remove();
+      $(this).unbind('click');
+    });
+    $span.appendTo($tag);
+    $button.appendTo($tag);
+    $tag.appendTo($appendHere);
+    $(element).val('');
   }
-
-});
+});*/

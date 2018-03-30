@@ -180,7 +180,7 @@
       </div>
 
       <!-- スマホヘッダー -->
-      <div class="sp">
+       <div class="sp">
         <header id="top-head">
           <div class="inner">
             <div class="mobile-logo">
@@ -264,6 +264,24 @@
               <!-- リンク -->
               <div class="header-nav">
                 <div class="header--nav">
+                  <div class="header-li">
+                    <nav role="navigation" class="menu_navi">
+                      <div id="menuToggle">
+                        <input type="checkbox" />
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                        <ul id="menu">
+                          <a href="#"><li>プロフィールを編集</li></a>
+                          <a href="#"><li>パスワード変更</li></a>
+                          <a href="/login"><li>ログアウト</li></a>
+                          <a href="#"><li>言語</li></a>
+                        </ul>
+                      </div>
+                    </nav>
+                  </div>
                   <div class="header-li"><a class="header-map" href="/dashbord"></a></div>
                 </div>
               </div>
@@ -282,12 +300,12 @@
           <header style="display: flex;" class="_mainc">
             <div class="pro">
               <div class="pro-pic">
-                <img class="avatar-image" src="https://i1.wp.com/lh3.googleusercontent.com/-qESBiRVtlAs/WSAZpULwV5I/AAAAAAAAQXA/4OUueFUhCnMrgWGuP4D5VLY6cjb_9-V4wCCo/w700-o/IMG_3584.jpg?ssl=1">
+                <img class="avatar-image" src="<%= @messages.photoURL %>">
               </div>
             </div>
             <section class="pro-det">
               <div class="pro-det-t">
-                <h1 class="account-h" title="name">hana_hanako</h1>
+                <h1 class="account-h" title="name"><%= @messages.displayName %></h1>
                 <a href="#" class="pro-cha">
                   <span class="">
                     <button href="#" class="btn2 btn-blue btn-border-o">プロフィールを編集</button>
@@ -325,15 +343,12 @@
           <header style="display: flex;" class="_sp">
             <div class="pro">
               <div class="pro-pic">
-                <img class="avatar-image" src="https://i1.wp.com/lh3.googleusercontent.com/-qESBiRVtlAs/WSAZpULwV5I/AAAAAAAAQXA/4OUueFUhCnMrgWGuP4D5VLY6cjb_9-V4wCCo/w700-o/IMG_3584.jpg?ssl=1">
+                <img class="avatar-image" src="<%= @messages.photoURL %>">
               </div>
             </div>
             <section class="pro-det">
               <div class="pro-det-t">
-                <h1 class="account-h" title="name">hana_hanako</h1>
-                <div class="pro-cha02">
-                  <button class="pro--cha02">state</button>
-                </div>
+                <h1 class="account-h" title="name"><%= @messages.displayName %></h1>
               </div>
               <div class="pro-det-t-sp">
                 <a href="#" class="pro-cha">

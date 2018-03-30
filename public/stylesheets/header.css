@@ -207,8 +207,7 @@
 }
 
 .header-map {
-  background-image: url(https://goo.gl/NLUdLH);
-  background-position: -408px -208px;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64' aria-labelledby='title' aria-describedby='desc' role='img' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3Ctitle%3EFind%3C/title%3E%3Cdesc%3EA line styled icon from Orion Icon Library.%3C/desc%3E%3Ccircle data-name='layer1' cx='24.2' cy='24.2' r='22.2' fill='none' stroke='%23202020' stroke-miterlimit='10' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'%3E%3C/circle%3E%3Cpath data-name='layer1' fill='none' stroke='%23202020' stroke-miterlimit='10' stroke-width='3' d='M39.9 39.9L62 62' stroke-linejoin='round' stroke-linecap='round'%3E%3C/path%3E%3C/svg%3E");
   background-repeat: no-repeat;
   height: 24px;
   width: 24px;
@@ -216,6 +215,187 @@
   overflow: hidden;
   text-indent: 110%;
   white-space: nowrap;
+}
+
+.menu_navi {
+  position: absolute;
+  left: 10px
+}
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 3px;
+  left: 5px;
+
+  z-index: 1;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+
+  cursor: pointer;
+
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin-bottom: 6px;
+  position: relative;
+
+  background: #bcbdbd;
+  border-radius: 4px;
+
+  z-index: 1;
+
+  -webkit-transform-origin: -1px 1px;
+
+          transform-origin: -1px 1px;
+
+  -webkit-transition: background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease,
+              -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+  transition: background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease,
+              -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease,
+              -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menuToggle span:first-child
+{
+  -webkit-transform-origin: 0% 0%;
+          transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+}
+
+/*
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  -webkit-transform: rotate(45deg) translate(-2px, -1px);
+          transform: rotate(45deg) translate(-2px, -1px);
+  background: #bcbdbd;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  -webkit-transform: rotate(0deg) scale(0.2, 0.2);
+          transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  -webkit-transform: rotate(-45deg) translate(0, -1px);
+          transform: rotate(-45deg) translate(0, -1px);
+}
+
+#menuToggle input:checked + .content-body {
+  background: rgba(45,58,77,.8);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+  position: absolute;
+  top: 132px;
+  /*width: 300px;*/
+  margin: -100px 0 0 -50px;
+  padding-left: 60px;
+  /*padding: 50px;
+  padding-top: 125px;*/
+  min-width: 330px;
+  max-width: 420px;
+  width: 100%;
+  width: calc(100% + 361px);
+  height: 100vh;
+
+  background: #fff;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  /* to stop flickering of text in safari */
+
+  -webkit-transform-origin: 0% 0%;
+
+          transform-origin: 0% 0%;
+  -webkit-transform: translate(-100%, 0);
+          transform: translate(-100%, 0);
+
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+  transition: -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0), -webkit-transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px 0;
+  font-size: 17px;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  -webkit-transform: none;
+          transform: none;
+}
+#menu a {
+  display: block;
 }
 
 .header-login {

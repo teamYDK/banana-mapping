@@ -1,0 +1,402 @@
+<% extend 'layout-exif' %>
+
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAh785SsicwF51UnhuAZvubF3wPLq_HtxY&sensor=false"></script>
+<script>
+var map = null;
+var marker = null;
+
+function loadGoogleMap(lat,lng) {
+	if ($("#mapInner").html() == "") {
+		var latlng = new google.maps.LatLng(lat,lng);
+		var opts = {
+			zoom: 15,
+			center: latlng,
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById("mapInner"), opts);
+		marker = new google.maps.Marker({
+			position: latlng,
+			map: map,
+			title: "撮影場所"
+		});
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode({"latLng": latlng},function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				var infoWindow = new google.maps.InfoWindow({content:results[1].formatted_address,position:latlng});
+				infoWindow.open(map,marker);
+			}
+		});
+		google.maps.event.addListener(map, "drag", setLocationInfo);
+		setTimeout("resetMap("+lat+","+lng+")", 100);
+	}
+}
+function resetMap(lat,lng) {
+	google.maps.event.trigger(map, "resize");
+	var latlng = new google.maps.LatLng(lat,lng);
+	var opts = {
+		zoom: 15,
+		center: latlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map.setOptions(opts);
+	setLocationInfo();
+}
+function setLocationInfo() {
+	var latlng = map.getCenter();
+	$("#locationInfo #lat").html("経度: "+latlng.lat());
+	$("#locationInfo #lng").html("緯度: "+latlng.lng());
+}
+function getFlickrImage(lat, lng, page) {
+	var html = $("#flickrImage").html();
+	var spl = html.indexOf("<!-- splitter -->");
+	if(spl != -1) {
+		html = html.substr(0,spl);
+	} else {
+		html = "";
+	}
+	$("#flickrImage").html(html+"<div class='loadingS'></div>");
+	$.ajax({
+		url: "searchFlickr.php",
+		type: "GET",
+		data: { lat: lat, lng: lng, page: page},
+		timeout: 20000,
+
+		complete: function(xhr, textStatus) {
+
+		},
+		success: function(result, textStatus, xhr) {
+			$("#flickrImage").html(html+result);
+		},
+		error: function(xhr, textStatus, error) {
+			var mes = "\
+			<div style='margin-top:0.6em;text-align:center;'>\
+				<button type='button' class='btn btn-default' onclick='getFlickrImage("+lat+","+lng+","+page+")'>\
+					<span class='glyphicon glyphicon-repeat' style='font-size: 80%;vertical-align: baseline;' aria-hidden='true'></span> 再取得\
+				</button>\
+			</div>";
+			$("#flickrImage").html(html+"<!-- splitter --><p>画像の取得に失敗しました("+textStatus+")</p>"+mes);
+		}
+	});
+}
+function getCameraData(model) {
+	$("#cameraDataContainer").html("<div class='loadingS'></div>");
+	$.ajax({
+		url: "searchAmazon.php",
+		type: "GET",
+		data: { model: model},
+		timeout: 20000,
+		success: function(result, textStatus, xhr) {
+			$("#cameraDataContainer").html(result);
+		},
+		error: function(xhr, textStatus, error) {
+			$("#cameraDataContainer").html("<p>カメラ情報の取得に失敗しました("+textStatus+")</p>");
+		}
+	});
+}
+
+$(function() {
+	var connection = null;
+	var ua = navigator.userAgent;
+	if ((ua.indexOf("iPhone") < 0) &&
+		(ua.indexOf("iPod") < 0) &&
+		(ua.indexOf("iPad") < 0) &&
+		(ua.indexOf("Android") < 0) &&
+		(ua.indexOf("Windows Phone") < 0) &&
+		("ondrop" in window) && (window.FormData)) {
+		$("#dropContainer").css("display","block");
+		$("#dropArea").on("drop", function(e) {
+			e.preventDefault();
+			var file = e.originalEvent.dataTransfer.files[0];
+			if (file.type.indexOf("image") != -1) {
+				$("#url").val("");
+				var fd = new FormData($("#exifChecker").get(0));
+				fd.append("file", file);
+				fd.append("ajax","1");
+				getExif(fd);
+			}
+		});
+		$("#dropArea").on("dragover", function(e) {
+			e.preventDefault();
+		});
+		if (localStorage.getItem("dropSw") == "block") {
+			$("#dropArea").css("display","block");
+			$("#dropControl span").toggleClass("glyphicon-plus");
+			$("#dropControl span").toggleClass("glyphicon-minus");
+		}
+	}
+
+	$("#dropControl").click(function(e){
+		e.preventDefault();
+		localStorage.setItem("dropSw",($("#dropArea").css("display") == "block") ? "none" : "block");
+		$("#dropArea").slideToggle(200);
+		$("#dropControl span").toggleClass("glyphicon-plus");
+		$("#dropControl span").toggleClass("glyphicon-minus");
+	});
+
+	$("#exifChecker").submit(function(e) {
+		var mes = '\
+			<div class="alert alert-info" role="alert">\
+				<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>\
+				<span class="sr-only">Info:</span>URLかFILEを指定して下さい。\
+			</div>';
+		if (($("#url").val() == "")&&($("#file").val() == "")) {
+			e.preventDefault();
+			$("#res").html(mes);
+		} else {
+			if (window.FormData) {
+				e.preventDefault();
+				var fd = new FormData($("#exifChecker").get(0));
+				fd.append("ajax","1");
+				getExif(fd);
+			}
+		}
+	});
+
+	$("#resetButton").click(function() {
+		var errMes = "";
+		if (connection && (connection.readyState != 4)) {
+			connection.abort();
+			connection = null;
+			errMes = '\
+			<div class="alert alert-warning" role="alert">\
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\
+				<span class="sr-only">Error:</span>解析を中断しました。\
+			</div>';
+		}
+		$("#res").html(errMes);
+	});
+
+	$(".nav-tabs1 a").click(function (e) {
+		e.preventDefault();
+		$(this).tab("show");
+	});
+	$("#textIndex a").click(function(e) {
+		e.preventDefault();
+		if ($($(this).attr("href")).css("display") == "none") {
+			$(".text").hide();
+		}
+		$($(this).attr("href")).slideToggle(200);
+	});
+	$(".close_text a").click(function(e) {
+		e.preventDefault();
+		$($(this).parent().parent()).slideToggle(200);
+	});
+
+	function getExif(fd) {
+
+		$("#submitButton").button("loading");
+		$("#res").html("<div class='loading'></div>");
+
+		var errMes = '\
+			<div class="alert alert-danger" role="alert">\
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>\
+				<span class="sr-only">Error:</span>ファイルの読み取りに失敗しました。URLまたはFILEが正しいかご確認下さい。\
+			</div>';
+
+		connection = $.ajax({
+			url: "./index.php",
+			type: "POST",
+			data: fd,
+			processData: false,
+			contentType: false,
+			timeout: 20000,
+
+			complete: function(xhr, textStatus) {
+				$("#submitButton").button("reset");
+			},
+			success: function(result, textStatus, xhr) {
+				$("#res").html(result);
+			},
+			error: function(xhr, textStatus, error) {
+				$("#res").html(errMes);
+			}
+		});
+	}
+
+});
+</script>
+
+<div class="container">
+	<header style="margin-top:30px;">
+		<div class="row">
+			<div class="col-xs-12 col-sm-8">
+				<h1 class="logo"><a href="http://exif-check.org/">EXIF確認君<span class="glyphicon glyphicon-search logo-icon" aria-hidden="true"></span></a></h1>
+				<a href="#help" data-toggle="modal" data-target=".bs-example-modal-sm">Help?</a>
+			</div>
+			<div class="col-xs-12 col-sm-4 socialIcons">
+				<a href="http://www.facebook.com/share.php?u=http://exif-check.org/" title="focebookで共有" target="_blank" onclick="window.open(this.href, 'facebook', 'width=600, height=500, personalbar=0, toolbar=0, scrollbars=1, resizable=1'); return false;" class="facebook" rel="nofollow"><span class="icon-facebook"></span></a>
+				<a href="http://twitter.com/share?url=http://exif-check.org/&amp;text=EXIF%e7%a2%ba%e8%aa%8d%e5%90%9b%20%2d%20%e7%94%bb%e5%83%8f%e6%83%85%e5%a0%b1%e8%a7%a3%e6%9e%90%e3%83%84%e3%83%bc%e3%83%ab" title="twitterで共有" target="_blank" onclick="window.open(this.href, 'twitter', 'width=600, height=500, personalbar=0, toolbar=0, scrollbars=1, resizable=1'); return false;" class="twitter" rel="nofollow"><span class="icon-twitter"></span></a>
+				<a href="http://b.hatena.ne.jp/add?mode=confirm&amp;url=http://exif-check.org/" title="はてなブックマークに追加" target="_blank" onclick="window.open(this.href, 'hatena', 'width=600, height=500, personalbar=0, toolbar=0, scrollbars=1, resizable=1'); return false;" class="hatebu" rel="nofollow"><span class="icon-hatebu"></span></a>
+				<a href="http://getpocket.com/edit?url=http://exif-check.org/&title=EXIF%e7%a2%ba%e8%aa%8d%e5%90%9b%20%2d%20%e7%94%bb%e5%83%8f%e6%83%85%e5%a0%b1%e8%a7%a3%e6%9e%90%e3%83%84%e3%83%bc%e3%83%ab" title="Pocketに追加" target="_blank" onclick="window.open(this.href, 'pocket', 'width=600, height=500, personalbar=0, toolbar=0, scrollbars=1, resizable=1'); return false;" class="pocket" rel="nofollow"><span class="icon-pocket"></span></a>
+				<a href="https://plusone.google.com/_/+1/confirm?hl=ja&url=http://exif-check.org/" title="Google+で共有" target="_blank" onclick="window.open(this.href, 'google+', 'width=600, height=500, personalbar=0, toolbar=0, scrollbars=1, resizable=1'); return false;" class="google" rel="nofollow"><span class="icon-google-plus"></span></a>
+			</div>
+		</div>
+	</header>
+	<hr>
+
+	<form id="exifChecker" class="form-horizontal" action="./index.php" method="post" enctype="multipart/form-data">
+		<div class="form-group">
+			<label class="col-sm-1 control-label" for="url">URL</label>
+			<div class="col-sm-10">
+				<input type="url" class="form-control" name="url" id="url" placeholder="URLを入力して下さい" value="">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-1 control-label" for="file">FILE</label>
+			<div class="col-sm-10">
+				<input type="file" name="file" id="file" accept="image/*">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-10">
+				<div id="dropContainer" style="display:none;">
+					<a id="dropControl" href="#dropArea"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>ドラッグ＆ドロップで追加</a>
+					<div id="dropArea">ここにドロップ</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-1 col-sm-10">
+				<button id="submitButton" type="submit" class="btn btn-info" style="font-weight:bold;" data-loading-text="解析中..." autocomplete="off">チェックする！</button>
+				<button id="resetButton" type="reset" class="btn btn-default">クリア</button>
+				<input type="hidden" name="ajax" id="ajax" value="0">
+			</div>
+		</div>
+	</form>
+	<div id="res"></div>
+	<hr>
+<nav id="textIndex">
+	<a href="#text_1">EXIFとは？</a> <a href="#text_2">本サービスについて</a> <a href="#text_5">お問い合わせ</a>
+</nav>
+
+<section id="text_1" class="text">
+<h2>EXIFとは？</h2>
+
+<p>EXIFは、デジタルカメラで撮影された写真に、撮影時のさまざまな情報（メタデータ）を埋め込んで保存するための画像ファイルのフォーマットです。
+Exchangeable Image File Formatの略で、日本語ではEXIF（イグジフ）と呼ばれます。</p>
+
+<p>最近のデジカメやスマホは全てEXIFに対応しており、
+撮影された画像にはEXIF情報が埋め込まれています。
+EXIF情報には撮影日時や使用機種（カメラ名）などの他に、シャッター速度や絞り、ISO感度など撮影時のカメラの設定が記録され、
+スマートフォンなどのGPSに対応している機種では撮影場所の経度や緯度、高度なども記録されます。
+また、撮影した画像を縮小したサムネイル画像も埋め込まれています。</p>
+
+<p>EXIF情報には様々なデータが含まれているため、
+他の人が撮影した写真の撮影時の設定などを参考にしたり、自分が撮影した写真を後から見直したりするのに大いに役立てることができます。</p>
+
+<p>一方で、インターネット上に画像を公開する場合には、意図せず他人に個人情報を公開してしまうことにもなりかねないので注意が必要です。
+特にGPS情報が埋め込まれている場合は緯度・経度の情報から住所を特定することもできてしまうため、
+それが公開して良いものかどうかを良く確認し、公開したくない場合は画像ソフトなどでEXIF情報を削除する必要があります。</p>
+
+<p>twitterやfacebookなどのSNSサイトでは、現在では個人情報保護のため、画像投稿時に自動でEXIF情報が削除されるようになっていますが、
+ブログではそのまま公開される場合が多いようです。
+また写真共有サイトなどは逆に投稿された画像のEXIF情報を表示する機能が付いている場合も多く、
+撮影時の設定などを参考にできるようになっています。</p>
+
+<p class="close_text"><a href="#" rel="nofollow"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 閉じる</a></p>
+</section>
+
+<section id="text_2" class="text">
+<h2>本サービスについて</h2>
+
+<p>Web上で簡単に画像のEXIF情報を確認することができます。</p>
+
+<p>インターネット上に公開されている画像と、PCやタブレットなどの端末内に保存されている画像の両方を調べることができ、
+インターネット上の画像はURL、端末内の画像はダイアログボックスでFILEを指定することでEXIF情報を確認できます。
+また、PCからご利用の場合は画像をドラッグ＆ドロップで指定することもできます（対応端末を参照）。</p>
+
+<p>撮影日時や使用カメラ（メーカ名、モデル名）、使用ソフト、シャッター速度やF値、ISO感度などの撮影設定、GPS情報など、
+記録されているEXIF情報をほぼ全て（省略せずに）表示することができます。
+ただしMakerNoteはメーカーにより仕様が異なり、またその仕様も公開されていないため正しく表示することはできません（MakerNoteセクションがある場合は内容をそのまま表示します）。</p>
+
+<p>カメラ情報が見つかった場合は、Amazonから商品情報を取得して表示します。</p>
+
+<p>GPS情報が見つかった場合は、画像共有サイトflickrから撮影場所の半径1km以内で撮影された画像を検索して表示します（10件ずつ追加検索が可能）。
+また、Googleマップで撮影場所の地図を表示することもできます。</p>
+
+<p>サムネイルが埋め込まれている場合は表示することができます。</p>
+
+<p>端末内の画像を確認する場合、EXIF情報を元に画像を適正方向に回転して表示します。</p>
+
+<p>本サービスはAmazon Product Advertising API、Google Maps API V3、Flickr APIを使用して制作されています。</p>
+
+<p class="close_text"><a href="#" rel="nofollow"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 閉じる</a></p>
+</section>
+
+<section id="text_5" class="text">
+<h2>お問い合わせ</h2>
+<p>本サービスへのご意見・ご要望などがございましたら以下のアドレスまでご連絡下さい。</p>
+<p>運営者: TETRA</p>
+<p><img src="./style/info.png" /></p>
+<br />
+<p>よくあるご質問：自分がチェックした画像が外部に公開されないか不安なのですが…
+　→　<strong>当サービスでは利用者がアップロードした画像の保存・外部への公開等は一切行っておりません</strong>
+　（EXIF情報確認のためにキャッシュされた画像は通常20～30分程度で自動で削除され、またキャッシュされている間も第3者に分かる形で公開されることはございません）。</p>
+<br />
+<p>また、以下のフォームからもメッセージをお送り頂けます。</p>
+<form class="form-horizontal" action="mail.php" method="post" enctype="multipart/form-data">
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="c_name">お名前</label>
+		<div class="col-sm-9">
+			<input class="form-control" type="text" id ="c_name" name="c_name" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="Email">メールアドレス</label>
+		<div class="col-sm-9">
+			<input class="form-control" type="text" id="Email" name="Email" />
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="message">メッセージ</label>
+		<div class="col-sm-9">
+			<textarea class="form-control" id ="message" name="message" cols="50" rows="5"></textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-9">
+			<button type="submit" class="btn btn-default">確認</button>
+			<button type="reset" class="btn btn-default">クリア</button>
+		</div>
+	</div>
+</form>
+<p class="close_text"><a href="#" rel="nofollow"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 閉じる</a></p>
+</section>
+
+	<footer>
+		<p>(C)2015 TETRA. All Rights Reserved.</p>
+	</footer>
+</div>
+
+<!-- Small modal -->
+<div id="help" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Help</h4>
+			</div>
+			<div class="modal-body">
+				<p>指定した画像のEXIF情報を取得します。</p>
+				<p>URLを入力するかファイルを選択して「チェックする！」ボタンを押して下さい（両方指定した場合はURLが優先されます）。</p>
+				<p>画像サイズによっては取得に時間がかかる場合があります。</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-59694108-1', 'auto');
+	ga('send', 'pageview');
+
+</script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtt5lsKj1OJBf3lAJTamkblXrMNLM7ay0&libraries=places&callback=initMap">
+    </script>

@@ -252,39 +252,6 @@ function initMap(){
   // Map
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-
-    //var contentString =
-
-    /*'<ul>'+
-        '<li><%= result.title %><br/><img src="/uploads/<%= result.file %>" width="300"></li>'+
-    '</ul>';*/
-
-	/*'<!-- <div id="modal-overlay"></div> -->'+
-	'<div class="ex_2">'+
-	'<!-- モーダルウインドウ -->'+
-	'<div id="modal-content">'+
-	'<form id="detail">'+
-	'<p id="username">UserName</p>'+
-	'<hr>'+
-	'<p id="comment">Comment</p>'+
-	'<hr>'+
-	'<p>Like　Comment</p>'+
-	'<hr>'+
-	'</form>'+
-	'<img src="picture/Paris.JPG">'+
-	'<p>'+
-	'<a id="modal-close" class="button-link">'+
-	'<p id="close">閉じる</p>'+
-	'</a>'+
-	'</p>'+
-	'<!-- モーダルウィンドウのコンテンツの終了 -->'+
-	'</div>'+
-	'<p>'+
-	'<a id="modal-open" class="button-link"></a>'+
-	'</p>'+
-	'<!-- ここまでモーダルウィンドウ -->'+
-	'</div>';*/
-
   var infowindow;
 
   var showInfoWindow = function(markerObj) {
@@ -406,49 +373,84 @@ function initMap(){
       $(this).blur();  //ボタンをフォーカスから離す
       showInfoWindow(this);
 
-      /*if( $( "modal-overlay")[0]) return false;
-
-      var contents02 = '<div id="modal-content" style="left: 427px; top: -3.5px; display: block;">' +
-                          '<form id="detail">' +
-                          '<p id="username">' + markerObj.usename + '</p>' + '<hr>' +
-                          '<p id="comment">' + markerObj.comments + '</p>' + '<hr>' +
-                          '</form>' +
-                        '<img id=uploadimg src="uploads/' + markerObj.file + '">' +
-
-                        '<p>' +
-                          '<a id="modal-close" class="button-link">' +
-                            '<p id="close">' + '閉じる' + '</p>' +
-                          '</a>' +
-                        '</p>' +
-
-                       '</div>';
-
-      //オーバーレイの出現
-      $("body").append(contents02);
-      $("body").append('<div id="modal-overlay"></div>');
-      $("modal-overlay").fadeIn("slow");
-
-      centeringModalSyncer();
-
-      $("#modal-content").fadeIn("slow");
-
-      $("modal-overlay,#modal-close").unbind().click( function() {
-
-        $("#modal-content,#modal-overlay").fadeOut("slow", function(){
-
-          $('#modal-overlay').remove();
-        });
-      });*/
-
     });
 
-    /*marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });*/
+  }//end of for()
 
-  }
+  // インスタンス[geocoder]作成
+    var geocoder = new google.maps.Geocoder();
+    var input1 = '35.71879444444444,139.73097222222222'
+    var input2 = '35.71950277777778,139.73411666666667'
+    var input3 = '48.865519444444445,2.3344972222222222'
+    var input4 = '35.69005556,139.7059944'
+    var input = '43.946358333333336,141.62945555555555'
+    var latlngStr = input.split(',', 2);
+    var latlng_geo = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+    var service = new google.maps.places.PlacesService(map);
 
- }
+    /*var address = 'お茶の水女子大学'
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            var address_geo = results[0].geometry.location;
+
+            console.log(address_geo);
+
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });*/
+
+    geocoder.geocode({
+        'location': latlng_geo     // 起点のキーワード
+    }, function(result, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            // 中心点を指定
+            var latlng_geo2 = result[0];
+            var latlng_geo3 = result[0].address_components;
+            var latlng_geo4 = result[0].formatted_address;
+            var latlng_id = result[0].place_id;
+            var latlng_bound = result[0].geometry.bounds;
+
+            console.log(latlng_geo2);
+            //console.log(latlng_geo3);
+            //console.log(latlng_geo4);
+
+            service.nearbySearch({
+              'location' : latlng_geo,
+              //'bounds' : latlng_bound,
+              'rankBy': google.maps.places.RankBy.DISTANCE,
+              //'radius' : '100',
+              'type' : 'point_of_interest'
+            }, function(results2, status2, pagination) {
+              if (status == google.maps.places.PlacesServiceStatus.OK) {
+                var place = results2;
+                console.log(place);
+
+                if (pagination.hasNextPage) {
+                  pagination.nextPage();
+                }
+              } else {
+                console.log('error');
+              }
+            });
+
+            /*service.getDetails({
+                  placeId: latlng_id,
+                }, function(place, status) {
+                  if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    var place_det = place;
+                    console.log(place_det);
+                  } else {
+                    console.log("error");
+                  }
+                });*/
+
+        } else {
+            alert('取得できませんでした…');
+        }
+    });
+
+} //end of initialize()
 
   google.maps.event.addDomListener(window, 'load', initialize);
 };

@@ -172,6 +172,24 @@ body {
     height: 40%;
     margin-top: 45px;
     z-index: 0;
+    background: none;
+  }
+  #header .center:before{
+    content: '';
+    background: url(https://www.g-de-b.com/matome/wp-content/uploads/2015/11/cake1.jpg) no-repeat center top;
+    background-size: cover;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    position: absolute;
+    /*ブラー効果で画像の端がボヤけた分だけ位置を調整*/
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: -1;/*重なり順序を一番下にしておく*/
   }
   #header .center .middle h1 {
     font-size: 30px;
