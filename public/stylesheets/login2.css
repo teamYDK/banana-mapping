@@ -132,6 +132,9 @@ input, button {
   -webkit-animation: animatePath 2s 0.5s forwards;
           animation: animatePath 2s 0.5s forwards;
 }
+input.login__input:-webkit-autofill {
+  background-color: transparent !important;
+}
 .login__input {
   display: inline-block;
   width: 22rem;

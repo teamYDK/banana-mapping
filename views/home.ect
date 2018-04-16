@@ -171,7 +171,7 @@
                 <div class="header--nav">
                   <div class="header-li"><a class="header-add" href="/"></a></div>
                   <div class="header-li"><a class="header-map header-icon" href="/dashbord"></a></div>
-                  <div class="header-li"><a class="header-login header-icon" href="/home"></a></div>
+                  <div class="header-li"><a class="header-login header-icon" href="/<%= @messages.uid %>"></a></div>
                 </div>
               </div>
 
@@ -276,7 +276,7 @@
                         <ul id="menu">
                           <a href="#"><li>プロフィールを編集</li></a>
                           <a href="#"><li>パスワード変更</li></a>
-                          <a href="/login"><li>ログアウト</li></a>
+                          <a href="/logout"><li>ログアウト</li></a>
                           <a href="#"><li>言語</li></a>
                         </ul>
                       </div>
@@ -306,9 +306,9 @@
             <section class="pro-det">
               <div class="pro-det-t">
                 <h1 class="account-h" title="name"><%= @messages.displayName %></h1>
-                <a href="#" class="pro-cha">
+                <a href="/accounts" class="pro-cha">
                   <span class="">
-                    <button href="#" class="btn2 btn-blue btn-border-o">プロフィールを編集</button>
+                    <button class="btn2 btn-blue btn-border-o">プロフィールを編集</button>
                   </span>
                 </a>
                 <div class="pro-cha02">
@@ -543,7 +543,7 @@
                       </a>
                     </div>
                     <div class="tab-link">
-                      <a class="tab--link" href="/home">
+                      <a class="tab--link" href="/><%= @messages.uid %>">
                         <div class="tab-icon profiletab"></div>
                       </a>
                     </div>
@@ -558,7 +558,7 @@
       <div id="modal-content" class="modal-cont">
         <div class="modal--cont">
           <ul class="set-menu">
-            <li class="setting-menu"><a href="/login"><button class="setting-button">ログアウト</button></a></li>
+            <li class="setting-menu"><a href="/logout"><button class="setting-button">ログアウト</button></a></li>
             <li class="setting-menu"><button class="setting-button">キャンセル</button></li>
           </ul>
           <button class="button-close"><a id="modal-close"><i class="fas fa-times"></i></a></button>

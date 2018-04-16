@@ -10,8 +10,18 @@
   width: 100%;
   max-width: 750px;
   margin: 0 auto;
-  padding: 0 15px;
+  padding: 0 25px;
   text-align: center;
+}
+
+.main-container h1 {
+  line-height: 1;
+  padding: 25px 0;
+  border-bottom: 2px solid #EDEDED;
+  font-size: 24px;
+  font-weight: lighter;
+  color: #2c3e50;
+  text-align: left;
 }
 
 section .filter{

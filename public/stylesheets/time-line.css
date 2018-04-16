@@ -90,6 +90,7 @@ div.time-cards {
   overflow: hidden;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 #timeline div.time-card-pro-det {
