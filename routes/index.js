@@ -100,7 +100,7 @@ router.get('/', function(req, res, next) {//文字の表示
     if (user) {
       // User is signed in.
       var uid = user.uid;
-      console.log(uid);
+      //console.log(uid);
 
       admin.auth().getUser(uid)
         .then(function(userRecord) {
@@ -124,6 +124,7 @@ router.get('/', function(req, res, next) {//文字の表示
 
     } else {
       console.log("User is signed out");
+      res.render('loggedout', {title: 'My Mapping'});
     }
   });
 });
@@ -136,8 +137,6 @@ router.get('/home', function(req, res, next) {//文字の表示
     if (user) {
       // User is signed in.
       var uid = user.uid;
-      console.log(uid);
-
       admin.auth().getUser(uid)
         .then(function(userRecord) {
           // See the UserRecord reference doc for the contents of userRecord.
@@ -150,22 +149,35 @@ router.get('/home', function(req, res, next) {//文字の表示
 
     } else {
       console.log("User is signed out");
+      res.render('loggedout', { title: 'My Mapping', user: user });
     }
   });
 });
 
 // ユーザ毎のホーム画面
-router.get('/:id(\\d+)', function(req, res){//画像のダウンロード？？
-  uid = req.params.id;
-  admin.auth().getUser(uid)
-    .then(function(userRecord) {
-      // See the UserRecord reference doc for the contents of userRecord.
-      var name = '@' + userRecord.displayName;
-      res.render('home', { title: name, messages: userRecord });
-    })
-    .catch(function(error) {
-      console.log("Error fetching user data:", error);
-    });
+router.get('/:id([a-zA-Z0-9]{10,30})', function(req, res){
+  var userID = req.url;
+  var userID = userID.replace( "/", "" ) ;
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      if(userID){
+        admin.auth().getUser(userID)
+          .then(function(userRecord) {
+            // See the UserRecord reference doc for the contents of userRecord.
+            var name = '@' + userRecord.displayName;
+            res.render('home', { title: name, messages: userRecord });
+          })
+          .catch(function(error) {
+            console.log("*****Error fetching user data:*****", error);
+          });
+      } else {
+        res.send('ANY USER');//画面の表示
+      }
+    } else {
+      console.log("User is signed out");
+      res.render('loggedout', { title: 'My Mapping', user: user });
+    }
+  });
 
 });
 
@@ -185,15 +197,51 @@ router.get('/tagged', function(req, res, next) {//文字の表示
 // タイムライン
 router.get('/dashbord', function(req, res, next) {//文字の表示
 
-  var latlng_geo = [35.71879444444444,139.73097222222222];
-  var latlng_geo_lat = '35.71879444444444';
-  var latlng_geo_lng = '139.73097222222222';
-
-  var query = admin.database().ref('messages').orderByKey();
-  query.once('value').then(function(snapshot) {
-    var messages = [];
-    snapshot.forEach(function(childSnapshot) {
-      messages.push(childSnapshot.val());
+  // Listening for auth state changes.
+  // [START authstatelistener]
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var query = admin.database().ref('messages');
+      var query2 = admin.database().ref('users');
+      var firebaseUser = firebase.auth().currentUser.uid;
+      var User = admin.database().ref('users/' + firebaseUser);
+      var post = admin.database().ref('users/' + firebaseUser + '/posts');
+      var messages = [];
+      /*query2.orderByKey().on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          console.log(childSnapshot.key);
+        });
+      });*/
+      User.child("follow").on("value", function(snapshot) { //フォローしてるユーザーを取り出す
+        snapshot.forEach(function(userID) { // フォローしてるユーザーIDの中身をとる
+          console.log("userID: ", userID.key);
+          query2.child(userID.key + "/posts").on("value", function(postID) { //フォローしているユーザーの投稿IDをとる
+            console.log("postID: ", postID.val());
+            postID.forEach(function(childSnapshot) { // 投稿ID毎の中身をとる
+              query.child(childSnapshot.key).on("value", function(childSnapshot2) {
+                query2.child(childSnapshot2.val().userUid).on("value", function(snapshot2) {
+                  var js1 = childSnapshot2.val();
+                  var js2 = snapshot2.val();
+                  var js3 = Object.assign(js1, js2)
+                  messages.push(js3);
+                });
+              });
+            });
+          });
+        });
+      });
+      post.orderByKey().on("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot){
+          query.child(childSnapshot.key).on("value", function(childSnapshot2) {
+            query2.child(childSnapshot2.val().userUid).on("value", function(snapshot2) {
+              var json1 = childSnapshot2.val();
+              var json2 = snapshot2.val();
+              var json3 = Object.assign(json1, json2)
+              messages.push(json3);
+            });
+          });
+        });
+      });
       const order = [
           {key: "time", reverse: true},
       ];
@@ -210,9 +258,11 @@ router.get('/dashbord', function(req, res, next) {//文字の表示
       };
       // ソート
       messages.sort(sort_by(order));
-      //console.log(messages);
-    });
-    res.render('timeline', { title: 'My Mapping', messages: messages });
+      res.render('timeline', { title: 'My Mapping', messages: messages, user: user});
+    } else {
+      console.log("User is signed out");
+      res.render('loggedout', { title: 'My Mapping'});
+    }
   });
 });
 
@@ -236,6 +286,40 @@ router.get('/login', function(req, res, next) {//文字の表示
       }
     });
     res.render('loginform', { title: 'My Mapping'});
+});
+
+router.get('/logout', function(req, res, next) {
+  firebase.auth().signOut().then(function() {
+    console.log('User Signed out');
+  }).catch(function(error) {
+    console.log('Failed to Sign out');
+  });
+  res.render('loggedout', { title: 'Sign Out' });
+})
+
+// アカウント設定
+router.get('/accounts', function(req, res, next) {//文字の表示
+  // Listening for auth state changes.
+  // [START authstatelistener]
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      var uid = user.uid;
+      admin.auth().getUser(uid)
+        .then(function(userRecord) {
+          // See the UserRecord reference doc for the contents of userRecord.
+          console.log("Successfully fetched user data:", userRecord.providerData);
+          res.render('accounts', { title: 'My Mapping', messages: userRecord });
+        })
+        .catch(function(error) {
+          console.log("Error fetching user data:", error);
+        });
+
+    } else {
+      console.log("User is signed out");
+      res.render('loggedout', { title: 'My Mapping', user: user });
+    }
+  });
 });
 
 //　仮のページ
@@ -328,6 +412,41 @@ router.get('/connect', function(req, res) {
   res.render('success', {title: 'success'});//画面の表示
 });
 
+router.post('/change_picture', function(req, res) {
+  upload(req, res, function(err) {
+    if(err) {
+      res.send("ERROR : CANNOT CHANGE PHOTO");
+    } else {
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          var uid = user.uid;
+          cloudinary.uploader.upload(req.file.path, function(result) {
+            var imagePath = result.secure_url;
+            admin.auth().updateUser(uid, {
+              photoURL: imagePath
+            })
+            .then(function(userRecord) {
+                console.log("Successfully updated user", userRecord.toJSON());
+                var firebaseRef =admin.database().ref();//追加
+                var userRef = firebaseRef.child('users');// データベースの参照の取得
+                  userRef.child(userRecord.uid).update({ // ...　囲んでる部分の描き方は変わらない 非同期処理
+                    photoURL: userRecord.photoURL,
+                  }).then(function(){
+                    res.redirect('/accounts');
+                  });
+              }).catch(function(error) {
+                  console.log("Error updating user:", error);
+                });
+            }); //end of cloudinary
+        } else {
+          console.log("User is signed out");
+          res.render('loggedout', { title: 'My Mapping'});
+        }
+      });
+    }
+  });
+});
+
 router.post('/tags', function(req, res) {
   var firebaseRef =firebase.database().ref();
   var tagsRef = firebaseRef.child('tags');// データベースの参照の取得
@@ -338,6 +457,7 @@ router.post('/tags', function(req, res) {
 });
 // ここでタグの登録処理をする。登録したあとにページに再び表示されるかは　express redirectと調べればわかるはず
 
+// ログイン認証
 router.post('/login_account', function(req, res) {
   //console.log(firebase.app().options);
   upload(req, res, function(err) {
@@ -350,12 +470,19 @@ router.post('/login_account', function(req, res) {
           var errorMessage = error.message;
           // ...
         }).then(function(){
-          res.render('success', {title: 'success'});//画面の表示
+          admin.auth().getUserByEmail(req.body.email)
+            .then(function(userRecord) {
+              res.render('success', {title: 'success', messages: userRecord });//画面の表示
+            })
+            .catch(function(error) {
+              console.log("Error fetching user data:", error);
+            });
         });
     }
   });
 });
 
+// アカウント作成
 router.post('/create_account', function(req, res) {
   //console.log(firebase.app().options);
   upload(req, res, function(err) {
@@ -374,26 +501,27 @@ router.post('/create_account', function(req, res) {
         .then(function(userRecord) {
           // See the UserRecord reference doc for the contents of userRecord.
           console.log("Successfully created new user:", userRecord.uid);
+          var firebaseRef =admin.database().ref();//追加
+          var userRef = firebaseRef.child('users');// データベースの参照の取得
+            userRef.child(userRecord.uid).set({ // ...　囲んでる部分の描き方は変わらない 非同期処理
+              username: req.body.username,
+              email: req.body.email,
+              password: req.body.password,
+              photoURL: "https://i1.wp.com/lh3.googleusercontent.com/-qESBiRVtlAs/WSAZpULwV5I/AAAAAAAAQXA/4OUueFUhCnMrgWGuP4D5VLY6cjb_9-V4wCCo/w700-o/IMG_3584.jpg?ssl=1",
+            }).then(function(){
+              res.send('<meta http-equiv="refresh" content="1;URL=/login">' + "Finish CREATING ACCOUNT!! " + '<br />');//画面の表示
+              //var user = firebase.auth().currentUser;
+              //console.log(user);
+            });
         })
         .catch(function(error) {
           console.log("Error creating new user:", error);
-        });
-
-      var firebaseRef =admin.database().ref();//追加
-      var userRef = firebaseRef.child('users');// データベースの参照の取得
-        userRef.push({ // ...　囲んでる部分の描き方は変わらない 非同期処理
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password
-        }).then(function(){
-          res.send('<meta http-equiv="refresh" content="1;URL=/login">' + "Finish CREATING ACCOUNT!! " + '<br />');//画面の表示
-          //var user = firebase.auth().currentUser;
-          //console.log(user);
         });
     }
   });
 });
 
+// 写真をアップロード
 router.post('/upload', function(req, res) {//入力データを読み込む
   upload(req, res, function(err) {//非同期の処理　upload　が読まれて次にいく、upload終わったらfunction実行される
     if(err) {//エラーの時
@@ -447,8 +575,6 @@ router.post('/upload', function(req, res) {//入力データを読み込む
 
                       var firebaseRef =admin.database().ref();//追加
                       var messagesRef = firebaseRef.child('messages');// データベースの参照の取得
-                      var firetagRef = admin.database().ref('tag');
-                      var tagRef = messagesRef.child('tags');
 
                       firebase.auth().onAuthStateChanged(function(user) {
                         if (user) {
@@ -463,7 +589,7 @@ router.post('/upload', function(req, res) {//入力データを読み込む
                                 var imagePath = result.secure_url;
                                 var imageTime = result.created_at;
                                 console.log(result);
-                                messagesRef.push({ // ...　囲んでる部分の描き方は変わらない 非同期処理
+                                var postData = {
                                   username: userRecord.displayName,
                                   userUid: userRecord.uid,
                                   title: req.body.title,
@@ -476,10 +602,23 @@ router.post('/upload', function(req, res) {//入力データを読み込む
                                   location: location_name,
                                   place: place_name,
                                   tag: req.body.tag
-                                }).then(function(){
-                                  res.send('<meta http-equiv="refresh" content="1;URL=/timeline">' + "Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
+                                };
+                                var newPostRef = messagesRef.push();
+                                var postId = newPostRef.key;
+                                var obj = {};
+                                obj[postId] = true;
+                                var usersRef = firebaseRef.child('users/' + userRecord.uid);
+                                var postRef = usersRef.child('posts');
+                                postRef.update(obj);
+                                newPostRef.set(postData).then(function(){
+                                  res.send('<meta http-equiv="refresh" content="1;URL=/dashbord">' + "Finish Upload!! " + '<br />' + "Filename: "+ req.file.originalname + " as " + req.file.filename + " Size: " + req.file.size);//画面の表示
                                   //res.render('home');
                                 });
+                                //var postId = newPostRef.key;
+                                //console.log(postId);
+                                /*postRef.push({
+                                  newPostKey: true
+                                });*/
                               });　//end of cloudinary_upload
 
                             })

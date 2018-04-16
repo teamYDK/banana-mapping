@@ -281,21 +281,19 @@
           <% for item in @messages : %>
           '<%= item.time %>',
           <% end : %>
-        ];
 
         </script>
 
        <article class="content">
 
          <% for item in @messages : %>
-
          <div id="timeline" class="time-cards">
            <div>
              <div class="time--cards">
                <article class="time-card">
                  <header class="time-card-pro">
                    <div class="time-card-pro-pic">
-                     <a><img class="time-card-avatar-image" src="https://i1.wp.com/lh3.googleusercontent.com/-qESBiRVtlAs/WSAZpULwV5I/AAAAAAAAQXA/4OUueFUhCnMrgWGuP4D5VLY6cjb_9-V4wCCo/w700-o/IMG_3584.jpg?ssl=1"></a>
+                     <a href="/<%= item.userUid %>"><img class="time-card-avatar-image" src="<%= item.photoURL %>"></a>
                    </div>
                    <div class="time-card-pro-det">
                      <div class="">
